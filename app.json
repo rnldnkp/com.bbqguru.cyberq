@@ -1,0 +1,25 @@
+{
+    "id": "com.bbqguru.cyberq",
+    "version": "0.0.1",
+    "compatibility": ">=1.0.0",
+    "name": {
+        "en": "BBQ Guru CyberQ WiFi",
+        "nl": "BBQ Guru CyberQ WiFi"
+    },
+    "description": {
+        "en": "Let Homey control your BBQ Pit",
+        "nl": "Laat Homey je BBQ Pit beheren"
+    },
+    "permissions": [
+        "homey:manager:speech-output"
+    ],
+    "speech": [
+        {
+            "id": "barbecue",
+            "importance": 0.6,
+            "synonyms": {
+                "en": [ "bbq", "queue", "weber", "egg" ]
+            }
+        }
+    ]
+}
