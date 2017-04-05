@@ -1,0 +1,28 @@
+{
+    "settings": {
+        "title": "CyberQ WiFi instellingen",
+        "intro": "Om verbinding te kunnen maken met uw CyberQ WiFi zijn onderstaande gegevens benodigd.",
+        "save": "Opslaan"
+    },
+    "cyberq": {
+	    "cookname": "BBQ Naam",
+	    "cooktemp": "BBQ Temperatuur",
+	    "cookset": "BBQ Doel",
+	    "cookstatus": "BBQ Status",
+	    "food1name": "P1 Naam",
+	    "food1temp": "P1 Temperatuur",
+	    "food1set": "P1 Doel",
+	    "food1status": "P1 Status",
+	    "food2name": "P2 Naam",
+	    "food2temp": "P2 Temperatuur",
+	    "food2set": "P2 Doel",
+	    "food2status": "P2 Status",
+	    "food3name": "P3 Naam",
+	    "food3temp": "P3 Temperatuur",
+	    "food3set": "P3 Doel",
+	    "food3status": "P3 Status",
+	    "fanoutput": "Fan Vermogen",
+	    "timerleft": "Timer seconden",
+	    "timerdone": "Eindtijd"
+    }
+}

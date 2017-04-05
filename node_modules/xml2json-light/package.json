@@ -1,0 +1,65 @@
+{
+  "name": "xml2json-light",
+  "version": "1.0.4",
+  "description": "This function acts as an XML to JSON converter. The function is extremely small and is in pure JavaScript, therefore it has no dependencies.  The converter takes XML attributes into consideration.  ## Installation ``` Download and use the function directl",
+  "main": "xml2json.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enkidootech/xml2json.git"
+  },
+  "keywords": [
+    "xml2json",
+    "xmltojson",
+    "xml",
+    "to",
+    "json",
+    "json",
+    "parser",
+    "light"
+  ],
+  "author": {
+    "name": "Enkidoo Technologies Inc."
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enkidootech/xml2json/issues"
+  },
+  "homepage": "https://github.com/enkidootech/xml2json#readme",
+  "contributors": [
+    {
+      "name": "Samuel Bourgault - samuel@enkidootech.com"
+    },
+    {
+      "name": "Laurence Amyotte - laurenceamyotte@gmail.com"
+    }
+  ],
+  "gitHead": "e0e3d8bd7a9739c395e0bf88026b768f215a937d",
+  "_id": "xml2json-light@1.0.3",
+  "_shasum": "681ec8a62e2609cbcd731819f10d04308efb0ee9",
+  "_from": "xml2json-light@*",
+  "_npmVersion": "2.14.12",
+  "_nodeVersion": "4.3.2",
+  "_npmUser": {
+    "name": "info_enkidoo",
+    "email": "info@enkidootech.com"
+  },
+  "dist": {
+    "shasum": "681ec8a62e2609cbcd731819f10d04308efb0ee9",
+    "tarball": "http://registry.npmjs.org/xml2json-light/-/xml2json-light-1.0.3.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "info_enkidoo",
+      "email": "info@enkidootech.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-13-west.internal.npmjs.com",
+    "tmp": "tmp/xml2json-light-1.0.3.tgz_1458316183547_0.16425618645735085"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/xml2json-light/-/xml2json-light-1.0.3.tgz"
+}

@@ -1,0 +1,28 @@
+{
+    "settings": {
+        "title": "CyberQ WiFi settings",
+        "intro": "To connect to your CyberQ WiFi we need the settings below.",
+        "save": "Save"
+    },
+    "cyberq": {
+	    "cookname": "BBQ Name",
+	    "cooktemp": "BBQ Temperature",
+	    "cookset": "BBQ Target",
+	    "cookstatus": "BBQ Status",
+	    "food1name": "P1 Name",
+	    "food1temp": "P1 Temperature",
+	    "food1set": "P1 Target",
+	    "food1status": "P1 Status",
+	    "food2name": "P2 Name",
+	    "food2temp": "P2 Temperature",
+	    "food2set": "P2 Target",
+	    "food2status": "P2 Status",
+	    "food3name": "P3 Name",
+	    "food3temp": "P3 Temperature",
+	    "food3set": "P3 Target",
+	    "food3status": "P3 Status",
+	    "fanoutput": "Fan Output",
+	    "timerleft": "Timer seconds",
+	    "timerdone": "End time"
+    }
+}

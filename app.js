@@ -1,6 +1,8 @@
-module.exports.init = function(){
+'use strict';
 
-    // run your code here
-    console.log("Hello BBQ world!");
-
+function init() {
+    Homey.log("BBQ Guru CyberQ app loading...");
+    
 }
+
+module.exports.init = init;

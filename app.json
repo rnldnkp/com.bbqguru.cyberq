@@ -1,25 +1,1358 @@
 {
     "id": "com.bbqguru.cyberq",
-    "version": "0.0.1",
-    "compatibility": ">=1.0.0",
     "name": {
-        "en": "BBQ Guru CyberQ WiFi",
-        "nl": "BBQ Guru CyberQ WiFi"
+        "en": "BBQ Guru",
+        "nl": "BBQ Guru"
     },
+    "version": "0.9.1",
+    "compatibility": ">=1.1.2",
     "description": {
         "en": "Let Homey control your BBQ Pit",
         "nl": "Laat Homey je BBQ Pit beheren"
     },
+	"category": "appliances",
+    "images": {
+        "large": "assets/images/large.jpg",
+        "small": "assets/images/small.jpg"
+    },
+    "author": {
+        "name": "Ronald Niekoop",
+        "email": "homey@rnldnkp.com"
+    },
     "permissions": [
-        "homey:manager:speech-output"
-    ],
-    "speech": [
-        {
-            "id": "barbecue",
-            "importance": 0.6,
-            "synonyms": {
-                "en": [ "bbq", "queue", "weber", "egg" ]
-            }
-        }
-    ]
+	       	"homey:manager:ledring",
+	        "homey:manager:speech-input",
+	        "homey:manager:speech-output"
+		],
+   "flow": {
+       "triggers": [
+       		{
+	            "id": "statusOnline",
+	            "title": {
+	                "en": "CyberQ coming online",
+	                "nl": "CyberQ komt online"
+	            },
+				"args": [{
+					"name": "device",
+					"type": "device",
+					"filter": "driver_id=cyberq"
+				}]  
+	        },
+       		{
+	            "id": "statusOffline",
+	            "title": {
+	                "en": "CyberQ went offline",
+	                "nl": "CyberQ ging offline"
+	            },
+				"args": [{
+					"name": "device",
+					"type": "device",
+					"filter": "driver_id=cyberq"
+				}]  
+	        },
+       		{
+	            "id": "tempChanged",
+	            "title": {
+	                "en": "has changed .. degrees",
+	                "nl": "is .. graden veranderd"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cooktemp", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1temp", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2temp", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3temp", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "difference",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "degrees",
+			                    "nl": "graden"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "tempAbove",
+	            "title": {
+	                "en": "is above .. degrees",
+	                "nl": "is hoger dan .. graden"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cooktemp", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1temp", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2temp", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3temp", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "temperature",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "degrees",
+			                    "nl": "graden"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "tempBelow",
+	            "title": {
+	                "en": "is below .. degrees",
+	                "nl": "is lager dan .. graden"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cooktemp", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1temp", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2temp", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3temp", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "temperature",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "degrees",
+			                    "nl": "graden"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "tempRemaining",
+	            "title": {
+	                "en": "within .. from target",
+	                "nl": "minder dan .. van doel"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probename",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cook", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "",
+			                    "nl": ""
+		                  	}
+					},
+					{
+						"name": "type",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "degrees", 
+								"label": { "en": "Degrees", "nl": "Graden"} 
+							} ,
+							{ "id": "percent", 
+								"label": { "en": "Percentage", "nl": "Procent"} 
+							} 
+						]
+					}
+				] 
+	        },
+	        {
+	            "id": "cookstatusChanged",
+	            "title": {
+	                "en": "BBQ Status has changed to",
+	                "nl": "BBQ Status veranderde naar"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "status",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "OK", "nl": "Ok"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "High", "nl": "Hoog"} 
+							} ,
+							{ "id": "2", 
+								"label": { "en": "Low", "nl": "Laag"} 
+							} ,
+							{ "id": "4", 
+								"label": { "en": "Error 3", "nl": "Error"} 
+							}
+						]
+					}
+				],
+	            "tokens": [{
+	                "name": "name",
+	                "type": "string",
+	                "title": {
+	                    "en": "Name",
+	                    "nl": "Naam"
+	                }
+	           
+	            },
+	            {
+	                "name": "temp",
+	                "type": "number",
+	                "title": {
+	                    "en": "Current temperature",
+	                    "nl": "Huidige temperatuur"
+	                }
+	                
+	           },
+	           {
+	                "name": "set",
+	                "type": "number",
+	                "title": {
+	                    "en": "Target temperature",
+	                    "nl": "Gewenste temperatuur"
+	                }
+	           
+	           },
+	           {
+	                "name": "status",
+	                "type": "number",
+	                "title": {
+	                    "en": "Status",
+	                    "nl": "Status"
+	                }
+	           
+	           }
+	           ]
+	        },	        
+	        {
+	            "id": "foodstatusChanged",
+	            "title": {
+	                "en": "status has changed to",
+	                "nl": "status veranderde naar"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probename",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+						"name": "status",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "OK", "nl": "Ok"} 
+							} ,
+							{ "id": "3", 
+								"label": { "en": "Done", "nl": "Klaar"} 
+							} ,
+							{ "id": "4", 
+								"label": { "en": "Error", "nl": "Error"} 
+							}
+						]
+					}
+				]
+	        },
+	        {
+	            "id": "timerActivated",
+	            "title": {
+	                "en": "Timer has been actived",
+	                "nl": "Timer werd ingesteld"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					}
+				],
+	            "tokens": [{
+	                "name": "hours",
+	                "type": "number",
+	                "title": {
+	                    "en": "hour",
+	                    "nl": "uur"
+	                }
+	           
+	            },
+	            {
+	                "name": "minutes",
+	                "type": "number",
+	                "title": {
+	                    "en": "minutes",
+	                    "nl": "minuten"
+	                }		            
+	            },
+	            {
+	                "name": "seconds",
+	                "type": "number",
+	                "title": {
+	                    "en": "seconds",
+	                    "nl": "seconden"
+	                }		            
+	            },
+	            {
+	                "name": "done",
+	                "type": "string",
+	                "title": {
+	                    "en": "endtime",
+	                    "nl": "eindtijd"
+	                }		            
+	            }           	 
+	           ]  
+	        },
+	        {
+	            "id": "timerleftBelow",
+	            "title": {
+	                "en": "Timer is less than",
+	                "nl": "Timer is korter dan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "seconds",
+			                    "nl": "seconden"
+		                  	}
+					}
+				],
+	            "tokens": [{
+	                "name": "hours",
+	                "type": "number",
+	                "title": {
+	                    "en": "hour",
+	                    "nl": "uur"
+	                }
+	           
+	            },
+	            {
+	                "name": "minutes",
+	                "type": "number",
+	                "title": {
+	                    "en": "minutes",
+	                    "nl": "minuten"
+	                }		            
+	            },
+	            {
+	                "name": "seconds",
+	                "type": "number",
+	                "title": {
+	                    "en": "seconds",
+	                    "nl": "seconden"
+	                }		            
+	            },
+	            {
+	                "name": "done",
+	                "type": "string",
+	                "title": {
+	                    "en": "endtime",
+	                    "nl": "eindtijd"
+	                }		            
+	            }        
+	           ]   
+	        },
+	        {
+	            "id": "timerleftAlarm",
+	            "title": {
+	                "en": "Timer has finished",
+	                "nl": "Timer wordt afgerond"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					}
+				]
+	        }
+        ],
+		"conditions": [
+       		{
+	            "id": "statusOnline",
+	            "title": {
+	                "en": "CyberQ is !{{online|offline}}",
+	                "nl": "CyberQ is !{{online|offline}}"
+	            },
+				"args": [{
+					"name": "device",
+					"type": "device",
+					"filter": "driver_id=cyberq"
+				}]  
+	        },
+	        {
+	            "id": "probeName",
+	            "title": {
+	                "en": ".. name is !{{|not}} equal to",
+	                "nl": ".. naam is !{{|niet}} gelijk aan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probename",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cookname", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1name", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2name", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3name", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "name",
+		                "type": "text",
+		                "placeholder" :
+		                 	{
+			                    "en": "name",
+			                    "nl": "naam"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "tempAboveBelow",
+	            "title": {
+	                "en": ".. is !{{above|below}}",
+	                "nl": ".. !{{hoger|lager}} dan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probename",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cook", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+						"name": "probetype",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "temp", 
+								"label": { "en": "Current", "nl": "Huidig"} 
+							} ,
+							{ "id": "set", 
+								"label": { "en": "Set", "nl": "Doel"} 
+							}
+						]
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "degrees",
+			                    "nl": "graden"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "tempRemaining",
+	            "title": {
+	                "en": ".. !{{|not}} within .. from target",
+	                "nl": ".. !{{minder|meer}} dan .. van doel"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probename",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cook", 
+								"label": { "en": "BBQ", "nl": "BBQ"} 
+							} ,
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "",
+			                    "nl": ""
+		                  	}
+					},
+					{
+						"name": "type",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "degrees", 
+								"label": { "en": "Degrees", "nl": "Graden"} 
+							} ,
+							{ "id": "percent", 
+								"label": { "en": "Percentage", "nl": "Procent"} 
+							} 
+						]
+					}
+				]	           
+	                
+	        },
+	        {
+	            "id": "cookStatus",
+	            "title": {
+	                "en": "BBQ Status is !{{|not}} equal to",
+	                "nl": "BBQ Status is !{{|niet}} gelijk aan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "status",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "OK", "nl": "Ok"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "High", "nl": "Hoog"} 
+							} ,
+							{ "id": "2", 
+								"label": { "en": "Low", "nl": "Laag"} 
+							} ,
+							{ "id": "4", 
+								"label": { "en": "Error", "nl": "Error"} 
+							}
+						]
+					}
+				]
+	        },
+	        {
+	            "id": "foodStatus",
+	            "title": {
+	                "en": ".. status is !{{|not}} equal to",
+	                "nl": ".. status is !{{|niet}} gelijk aan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "food1status", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2status", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3status", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+						"name": "status",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "OK", "nl": "Ok"} 
+							} ,
+							{ "id": "3", 
+								"label": { "en": "Done", "nl": "Klaar"} 
+							} ,
+							{ "id": "4", 
+								"label": { "en": "Error", "nl": "Error"} 
+							}
+						]
+					}
+				]
+	        },
+	        {
+	            "id": "fanoutputAboveBelow",
+	            "title": {
+	                "en": "Fan output is !{{above|below}}",
+	                "nl": "Fan vermogen !{{hoger|lager}} dan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "percent (0-100)",
+			                    "nl": "procent (0-100)"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "timerleftAboveBelow",
+	            "title": {
+	                "en": "Timer is !{{more|less}} than",
+	                "nl": "Timer is !{{langer|korter}} dan"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "variable",
+		                "type": "number",
+		                "placeholder" :
+		                 	{
+			                    "en": "seconds",
+			                    "nl": "seconden"
+		                  	}
+					}
+				]
+	        }
+	    ],
+		"actions": [
+       		{
+	            "id": "nameSet",
+	            "title": {
+	                "en": "Change name to",
+	                "nl": "Verander naam in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cook", 
+								"label": { "en": "BBQ"} 
+							} ,
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "name",
+		                "type": "text",
+		                "placeholder" :
+		                 	{
+			                    "en": "Name",
+			                    "nl": "Naam"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "targetSet",
+	            "title": {
+	                "en": "Change target to",
+	                "nl": "Verander doel in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "cook", 
+								"label": { "en": "BBQ"} 
+							} ,
+							{ "id": "food1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "food2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "food3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					},
+					{
+		                "name": "temperature",
+		                "type": "number",
+		                "min": "0",
+		                "max": "475",
+		                "placeholder" :
+		                 	{
+			                    "en": "Degrees",
+			                    "nl": "Graden"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "timerSet",
+	            "title": {
+	                "en": "Change timer to",
+	                "nl": "Verander timer in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "hours",
+		                "type": "number",
+		                "min": "0",
+		                "max": "99",
+		                "placeholder" :
+		                 	{
+			                    "en": "Hours",
+			                    "nl": "Uren"
+		                  	}
+					},
+					{
+		                "name": "minutes",
+		                "type": "number",
+		                "min": "0",
+		                "max": "59",
+		                "placeholder" :
+		                 	{
+			                    "en": "Minutes",
+			                    "nl": "Minuten"
+		                  	}
+					},
+					{
+		                "name": "seconds",
+		                "type": "number",
+		                "min": "0",
+		                "max": "59",
+		                "placeholder" :
+		                 	{
+			                    "en": "Seconden",
+			                    "nl": "Seconds"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "scrollingSet",
+	            "title": {
+	                "en": "Change menu scrolling",
+	                "nl": "Verander scrollen van menu"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "onoff",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "On", "nl": "Aan"} 
+							}
+						]
+					}
+				]
+	        },
+       		{
+	            "id": "alarmbeepSet",
+	            "title": {
+	                "en": "Set alarm beeps",
+	                "nl": "Stel alarm geluid in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "beep",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "Level 1", "nl": "Niveau 1"} 
+							} ,
+							{ "id": "2", 
+								"label": { "en": "Level 2", "nl": "Niveau 2"} 
+							} ,
+							{ "id": "3", 
+								"label": { "en": "Level 3", "nl": "Niveau 3"} 
+							} ,
+							{ "id": "4", 
+								"label": { "en": "Level 4", "nl": "Niveau 4"} 
+							} ,
+							{ "id": "5", 
+								"label": { "en": "Level 5", "nl": "Niveau 5"} 
+							}
+						]
+					}
+				]
+	        },
+       		{
+	            "id": "keybeepSet",
+	            "title": {
+	                "en": "Set key beeps",
+	                "nl": "Stel key geluid in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "beep",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "On", "nl": "Aan"} 
+							}
+						]
+					}
+				]
+	        },
+       		{
+	            "id": "cookholdSet",
+	            "title": {
+	                "en": "Change cook hold",
+	                "nl": "Verander BBQ vasthouden"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "temperature",
+		                "type": "number",
+		                "min": "0",
+		                "max": "475",
+		                "placeholder" :
+		                 	{
+			                    "en": "Degrees",
+			                    "nl": "Graden"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "timeoutSet",
+	            "title": {
+	                "en": "Change timeout action",
+	                "nl": "Verander timeout actie"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "action",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "No action", "nl": "Geen actie"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "Hold", "nl": "Vasthouden"} 
+							} ,
+							{ "id": "2", 
+								"label": { "en": "Alarm", "nl": "Alarm"} 
+							} ,
+							{ "id": "3", 
+								"label": { "en": "Shutdown", "nl": "Uitschakelen"} 
+							}
+						]
+					}
+				]
+	        },
+	        {
+	            "id": "alarmdevSet",
+	            "title": {
+	                "en": "Change alarm deviation",
+	                "nl": "Verander alarm marge"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "degrees",
+		                "type": "number",
+		                "min": "10",
+		                "max": "100",
+		                "placeholder" :
+		                 	{
+			                    "en": "Degrees",
+			                    "nl": "Graden"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "cookrampSet",
+	            "title": {
+	                "en": "Change ramp to",
+	                "nl": "Verander ramp in"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "probe",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
+							} ,
+							{ "id": "2", 
+								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
+							} ,
+							{ "id": "3", 
+								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
+							}
+						]
+					}
+				]
+	        },
+	        {
+	            "id": "opendetectSet",
+	            "title": {
+	                "en": "Change open detect",
+	                "nl": "Verander open detectie"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "onoff",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "1", 
+								"label": { "en": "On", "nl": "Aan"} 
+							}
+						]
+					}
+				]
+	        },
+       		{
+	            "id": "propbandSet",
+	            "title": {
+	                "en": "Change proportional band to",
+	                "nl": "Verander propertionele marge naar"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "degrees",
+		                "type": "number",
+		                "min": "5",
+		                "max": "100",
+		                "placeholder" :
+		                 	{
+			                    "en": "Degrees",
+			                    "nl": "Graden"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "backlightSet",
+	            "title": {
+	                "en": "Change backlight",
+	                "nl": "Verander helderheid"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "percentage",
+		                "type": "number",
+		                "min": "0",
+		                "max": "100",
+		                "placeholder" :
+		                 	{
+			                    "en": "Percentage",
+			                    "nl": "Procent"
+		                  	}
+					}
+				]
+	        },
+       		{
+	            "id": "contrastSet",
+	            "title": {
+	                "en": "Change contrast",
+	                "nl": "Verander contrast"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+		                "name": "percentage",
+		                "type": "number",
+		                "min": "0",
+		                "max": "100",
+		                "placeholder" :
+		                 	{
+			                    "en": "Percentage",
+			                    "nl": "Procent"
+		                  	}
+					}
+				]
+	        },
+	        {
+	            "id": "mailportSet",
+	            "title": {
+	                "en": "Change mail alarm",
+	                "nl": "Verander e-mail alarm"
+	            },
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"filter": "driver_id=cyberq"
+					},
+					{
+						"name": "port",
+						"type": "dropdown",
+						"values": [ 
+							{ "id": "0", 
+								"label": { "en": "Off", "nl": "Uit"} 
+							} ,
+							{ "id": "25", 
+								"label": { "en": "SMTP (25)"} 
+							} ,
+							{ "id": "465", 
+								"label": { "en": "SSL (465)"} 
+							} ,
+							{ "id": "587", 
+								"label": { "en": "TLS (587)"} 
+							}
+						]
+					}
+				]
+	        }
+
+
+        ]
+    },
+   "drivers": [
+   		{
+	        "id": "cyberq",
+	        "name": {
+	        "en": "CyberQ WiFi",
+	        "nl": "CyberQ WiFi"
+	        },
+	        "images": {
+	        "large": "drivers/assets/images/large.jpg",
+	        "small": "drivers/assets/images/small.jpg"
+	        },
+	        "class": "sensor",
+	        "capabilities": [
+	            "cooktemp",
+	            "cookset",
+	            "food1temp",
+	            "food1set",
+	            "food2temp",
+	            "food2set",
+	            "food3temp",
+	            "food3set",
+	            "fanoutput",
+	            "timerleft"
+	        ],
+			"capabilitiesOptions": {
+				"cooktemp": {
+					"title": {
+						"en": "BBQ Current Temperature",
+						"nl": "BBQ Huidige Temperatuur"
+					}
+	
+				},
+				"cookset": {
+					"title": {
+						"en": "BBQ Set Temperature",
+						"nl": "BBQ Gewenste Temperatuur"
+					}
+	
+				},
+				"food1temp": {
+					"title": {
+						"en": "Food1 Current Temperature",
+						"nl": "Food1 Huidige Temperatuur"
+					}
+	
+				},			
+				"food1set": {
+					"title": {
+						"en": "Food1 Set Temperature",
+						"nl": "Food1 Gewenste Temperatuur"
+					}
+	
+				},
+				"food2temp": {
+					"title": {
+						"en": "Food2 Current Temperature",
+						"nl": "Food2 Huidige Temperatuur"
+					}
+	
+				},
+				
+				"food2set": {
+					"title": {
+						"en": "Food2 Set Temperature",
+						"nl": "Food2 Gewenste Temperatuur"
+					}
+	
+				},
+				"food3temp": {
+					"title": {
+						"en": "Food3 Current Temperature",
+						"nl": "Food3 Huidige Temperatuur"
+					}
+	
+				},				
+				"food3set": {
+					"title": {
+						"en": "Food3 Set Temperature",
+						"nl": "Food3 Gewenste Temperatuur"
+					}
+	
+				},
+				"fanoutput": {
+					"title": {
+						"en": "Fan output",
+						"nl": "Fan vermogen"
+					}
+	
+				},
+				"timerleft": {
+					"title": {
+						"en": "Timer left",
+						"nl": "Timer resterend"
+					}
+	
+				}
+			},
+	        "pair": [{
+	            "id": "start"
+	        }, {
+	            "id": "list_my_devices",
+	            "template": "list_devices",
+	            "navigation": {
+	                "next": "add_my_devices"
+	            }
+	        }, {
+	            "id": "add_my_devices",
+	            "template": "add_devices"
+	        }],
+	        "settings": [{
+	            "type": "group",
+	            "label": {
+	            "en": "CyberQ WiFi settings",
+	            "nl": "CyberQ WiFi instellingen"
+	            },
+	            "children": [{
+	                 "id": "cyberq_ip",
+	                 "type": "text",
+	                 "label": {
+		                 "en": "IP address",
+		                 "nl": "IP adres"
+	                 },
+	                 "value": ""
+	            }, {
+	                 "id": "cyberq_interval",
+	                 "type": "number",
+						"attr": {
+						    "min": 1,
+						    "max": 60
+						},
+	                 "label": {
+		                 "en": "Update interval",
+		                 "nl": "Update interval"
+	                 },
+	                 "value": 1
+	            }]
+	        }]
+	    }]
+
 }
