@@ -1,4 +1,7 @@
 # com.bbqguru.cyberq
+
+Update 9 april 2017: almost 700 flows are possible at the moment! Now working to finish it up, so it can use the ip-address you set for example ;)
+
 BBQ Guru CyberQ app for Homey
 
 Just started working on the idea of an App for Homey that connects with your BBQ Guru's CyberQ Wifi.
