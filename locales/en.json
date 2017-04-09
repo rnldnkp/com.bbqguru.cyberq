@@ -1,0 +1,12 @@
+{
+    "status_hot": "too hot",
+    "status_cold": "too cold",
+    "status_ok": "just fine",
+    "settings": {
+        "title": "CyberQ WiFi settings",
+        "intro": "To connect to your CyberQ WiFi we need the settings below.",
+        "use_ledring": "Use ledring",
+        "use_ledring_explain": "Ledring lights up green when preset switched successful, red when not successful",
+        "save": "Save"
+    }
+}
