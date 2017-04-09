@@ -1,6 +1,5 @@
 'use strict';
 
-<<<<<<< HEAD
 //var devices = {};
 //var cyberq = require('./../../includes/cyberq.js');
 //var parser = require('xml2json-light');
@@ -8,19 +7,12 @@ var request = require('request');
 var querystring = require('querystring');
 //var refreshIntervalId;
 //var prevstatus;
-=======
-var request = require('request');
-var querystring = require('querystring');
->>>>>>> origin/master
 
 //var homey_lang = Homey.manager('i18n').getLanguage();
 
 var cyberq;
 const util = require('./../../lib/util.js');
-<<<<<<< HEAD
 //const driver = require('./drivers/cyberq/driver.js');
-=======
->>>>>>> origin/master
 const parser = require('xml2json-light');
 
 // Enable full logging for more info
@@ -64,11 +56,6 @@ var oldfood3Temp;
 var oldfood3Status;
 var oldtempRemaining = {};
 var oldtempTrigger = {};
-<<<<<<< HEAD
-=======
-var oldstatusTrigger = {};
-var oldtimerTrigger = {};
->>>>>>> origin/master
 var oldStatus;
 var countStatus;
 var Status;
@@ -126,11 +113,7 @@ var self = {
     init: function(devices_data, callback) {
 		util.wuLog("Initialize driver", severity.debug);	   
 		 
-<<<<<<< HEAD
 //        self.checkInsightsLogs();
-=======
-        self.checkInsightsLogs();
->>>>>>> origin/master
 
         // Listen for triggers and conditions
         registerTriggerAndConditionListeners();
@@ -156,43 +139,16 @@ var self = {
     },
 
     getDevices: function(devices_data) {
-<<<<<<< HEAD
 		util.wuLog("Initialize devices", severity.debug);		    
-=======
-		util.wuLog("Initialize devices", severity.debug);	
-		
-		
-    devices_data.forEach(function initdevice(device) {
-	    
-	    
-        Homey.log('add device: ' + JSON.stringify(device));
-
-		getcqsettings(device);
-    });
-		
-			    
-/*
->>>>>>> origin/master
 	    devices_data.forEach(function initdevice(device) 
 	    	{
 				devices[device.id] = device;
 		        module.exports.getSettings(device, function(err, settings){
-<<<<<<< HEAD
 		            devices[device.id].settings = settings;
 		        });
 				util.wuLog("CyberQ Initialized: " + JSON.stringify(device.id), severity.debug);
     		}
     	);    	
-=======
-			        util.wuLog("CyberQ Settings: " + JSON.stringify(settings), severity.debug);
-		            devices[device.id].settings = settings;
-		        });
-				util.wuLog("CyberQ Initialized: " + JSON.stringify(device.id), severity.debug);
-				util.wuLog("CyberQ Settings: " + JSON.stringify(devices[device.id].settings), severity.debug);
-    		}
-    	);  
-*/  	
->>>>>>> origin/master
 	},
 	
     scheduleData: function(update_frequency) {
@@ -211,10 +167,7 @@ var self = {
         
         trigger_update();
 
-<<<<<<< HEAD
 // tijdelijk op 30 sec
-=======
->>>>>>> origin/master
         var updateTime = update_frequency * 60 * 1000;  // From minutes to milliseconds
         dataInterval = setInterval(trigger_update.bind(this), updateTime);
         
@@ -222,11 +175,7 @@ var self = {
         function trigger_update() {
             //self.updateData();
             
-<<<<<<< HEAD
             Object.keys(devices).forEach(function (device_id) 
-=======
-            Object.keys(devices).forEach(function (device) 
->>>>>>> origin/master
             	{  
 		                     
 /*
@@ -235,23 +184,11 @@ var self = {
 			            	devices[device_id].data = [];  
 			         	}
 */
-<<<<<<< HEAD
 			        var cyberq_ip = devices[device_id].settings.cyberq_ip;
 			        //var cyberq_ip = "10.10.0.134";
 			        var url = 'http://' + cyberq_ip + '/all.xml';
 			        util.wuLog("Requesting updateData: " + url, severity.debug);
 			        self.updateData(device_id, url) 
-=======
-				util.wuLog("CyberQ Settings: " + JSON.stringify(devices[device.id]), severity.debug);
-		        util.wuLog("CyberQ Settings: " + JSON.stringify(devices[device.id].settings), severity.debug);
-		        
-			        var cyberq_ip = devices[device.id].settings.cyberq_ip;
-			        util.wuLog("CyberQ IP: " + cyberq_ip, severity.debug);
-			        var cyberq_ip = "10.10.0.134";
-			        var url = 'http://' + cyberq_ip + '/all.xml';
-			        util.wuLog("Requesting updateData: " + url, severity.debug);
-			        self.updateData(device, url) 
->>>>>>> origin/master
 			    }
 			);
 
@@ -310,11 +247,7 @@ var self = {
         if (!util.value_exist(useErrorNotifications)) useErrorNotifications = true;
 
         // Get user settings for update frequency
-<<<<<<< HEAD
         update_frequency = Homey.manager('settings').get('updateFrequency');
-=======
-        update_frequency = Homey.manager('settings').get('cyberq_interval');
->>>>>>> origin/master
         util.wuLog("Update every (user setting): " + update_frequency, severity.debug);
 
         if (update_frequency < 1 || update_frequency > 60 || !util.value_exist(update_frequency)) {
@@ -527,7 +460,6 @@ var self = {
                 util.updateGlobalTokens(cyberqData);
 
                 util.wuLog("Current time: " + new Date(), severity.debug);
-<<<<<<< HEAD
                 if (fullLogging) util.wuLog("Cyberq data: " + JSON.stringify(cyberqData), severity.debug);
                 
 // need to find better if structure, but will do for now                    
@@ -544,45 +476,21 @@ var self = {
                     if (fullLogging) util.wuLog("cooktemp, currently: " + JSON.stringify(cyberqData.cooktemp) + " old: " + JSON.stringify(oldcookTemp), severity.debug);
                     //if (fullLogging) util.wuLog("Old cooktemp: " + JSON.stringify(oldcookTemp), severity.debug);
 
-=======
-                if (fullLogging) util.wuLog("Cyberq data: " + JSON.stringify(cyberqData), severity.debug);                
-                    
-                self.tempchanged (device_id);                
-				
-				self.cookstatusChanged(cyberqData.cookname, cyberqData.cooktemp, cyberqData.cookset, cyberqData.cookstatus, device_id);
-				
-				self.foodstatusChanged(device_id);
-				
-/*
-                // BBQ Temperature triggers and conditions
-                if (util.value_exist(cyberqData.cooktemp)) {
-                    if (fullLogging) util.wuLog("cooktemp, currently: " + JSON.stringify(cyberqData.cooktemp) + " old: " + JSON.stringify(oldcookTemp), severity.debug);
->>>>>>> origin/master
                     // Determine if the temp has changed
                     if (!util.value_exist(oldcookTemp)){
                         if (fullLogging) util.wuLog("cooktemp, No oldcookTemp value exists, maybe it's the first start of app", severity.debug);
                         // First time update after reboot/install
                         oldcookTemp = cyberqData.cooktemp;
-<<<<<<< HEAD
 //                        cyberqData.cook.oldtemp = cyberqData.cooktemp;
                     } else if (util.diff(oldcookTemp, cyberqData.cooktemp) >= 1) {
                         // Only trigger when difference is equal or more then 1 degree
                         //if (fullLogging) util.wuLog("oldcookTemp: " + oldcookTemp + " temp: " + cyberqData.cooktemp, severity.debug);
-=======
-                    } else if (util.diff(oldcookTemp, cyberqData.cooktemp) >= 1) {
-                        // Only trigger when difference is equal or more then 1 degree
->>>>>>> origin/master
                         oldcookTemp = cyberqData.cooktemp;
                         self.cooktempChanged(cyberqData.cookname, cyberqData.cooktemp, cyberqData.cookset, cyberqData.cookstatus, device_id);
                     }
                     // Start trigger
-<<<<<<< HEAD
                     self.cooktempAboveBelow(cyberqData.cookname, cyberqData.cooktemp, cyberqData.cookset, cyberqData.cookstatus, device_id);
                     self.tempAboveBelow(device_id);
-=======
-//                    self.cooktempAboveBelow(cyberqData.cookname, cyberqData.cooktemp, cyberqData.cookset, cyberqData.cookstatus, device_id);
-//                    self.tempAboveBelow(device_id);
->>>>>>> origin/master
 
                 } else {
                     // No temperature data available!
@@ -591,15 +499,11 @@ var self = {
 
                 // BBQ Status triggers and conditions
                 if (util.value_exist(cyberqData.cookstatus)) {
-<<<<<<< HEAD
 	                //if (fullLogging) util.wuLog("");
 
                     if (fullLogging) util.wuLog("cookstatus, currently: " + JSON.stringify(cyberqData.cookstatus) + " old: " + JSON.stringify(oldcookStatus), severity.debug);
                     //if (fullLogging) util.wuLog("Old cooktemp: " + JSON.stringify(oldcookTemp), severity.debug);
 
-=======
-                    if (fullLogging) util.wuLog("cookstatus, currently: " + JSON.stringify(cyberqData.cookstatus) + " old: " + JSON.stringify(oldcookStatus), severity.debug);
->>>>>>> origin/master
                     // Determine if the temp has changed
                     if (!util.value_exist(oldcookStatus)){
                         if (fullLogging) util.wuLog("cookstatus, No oldcookStatus value exists, maybe it's the first start of app", severity.debug);
@@ -607,10 +511,7 @@ var self = {
                         oldcookStatus = cyberqData.cookstatus;
                     } else if (util.diff(oldcookStatus, cyberqData.cookstatus) >= 1) {
                         // Only trigger when difference is equal or more then 1 degree
-<<<<<<< HEAD
                         //if (fullLogging) util.wuLog("oldcookTemp: " + oldcookTemp + " temp: " + cyberqData.cooktemp, severity.debug);
-=======
->>>>>>> origin/master
                         oldcookStatus = cyberqData.cookstatus;
                         self.cookstatusChanged(cyberqData.cookname, cyberqData.cooktemp, cyberqData.cookset, cyberqData.cookstatus, device_id);
                     }
@@ -761,7 +662,6 @@ var self = {
                     // No temperature data available!
                     util.wuLog("food3status is undefined!", severity.debug)
                 }
-<<<<<<< HEAD
 
 // 				Nog op iets checkem?
 				self.tempRemaining(device_id);
@@ -806,14 +706,6 @@ var self = {
                     util.wuLog("food3tempRemaining, one of the values is undefined, maybe it's the first start of app", severity.debug)
                 }                                
                 // Fan Output triggers and conditions
-=======
-*/
-
-
-
-/*
-              // Fan Output triggers and conditions
->>>>>>> origin/master
                 if (util.value_exist(cyberqData.fanoutput)) {
 	                if (fullLogging) util.wuLog("");
                     if (fullLogging) util.wuLog("fanoutput: " + JSON.stringify(cyberqData.fanoutput), severity.debug);
@@ -823,7 +715,6 @@ var self = {
                     // No fanoutput data available!
                     util.wuLog("fanoutput is undefined!", severity.debug)
                 }
-<<<<<<< HEAD
                 
                 // Timer triggers and conditions
                 if (util.value_exist(cyberqData.timerleft)) {
@@ -853,29 +744,6 @@ var self = {
 
                 // Add data to insights
 /*
-=======
-*/
-                
-
-				// Timer should have changed before we check any further
-                if (!util.value_exist(oldTimerleft)){
-                    if (fullLogging) util.wuLog("No oldTimerleft value exists, maybe it's the first start of app", severity.debug);
-                    // First time update after reboot/install
-                    oldTimerleft = cyberqData.timerleft;
-                } else if (util.diff(oldTimerleft, cyberqData.timerleft) >= 1) {
-                    // Only trigger when difference is equal or more then 1 degree
-                    if (fullLogging) util.wuLog("oldTimerleft: " + oldTimerleft + " now remaining: " + cyberqData.timerleft, severity.debug);
-                    
-                    // Go to checkpoint
-                    self.timerChanged(cyberqData.timerleft, device_id);
-                    oldTimerleft = cyberqData.timerleft;
-                }
-
-
-/*
-                // Add data to insights
-
->>>>>>> origin/master
                 self.addInsightsEntry("cooktemp", cyberqData.cooktemp);
                 self.addInsightsEntry("cookset", cyberqData.cookset);
                 self.addInsightsEntry("food1temp", cyberqData.food1temp);
@@ -888,7 +756,6 @@ var self = {
                 self.addInsightsEntry("timerleft", cyberqData.timerleft);
 */
 
-<<<<<<< HEAD
                 
 /*
                 insightsLogs.forEach(function(log) 
@@ -897,16 +764,6 @@ var self = {
 	                	
                 	});
 */
-=======
-
-                
-
-                insightsLogs.forEach(function(log) {
-	                self.addInsightsEntry(log, cyberqData[log], device_id);
-	                if (fullLogging) util.wuLog("Added insight entry for: " + log, severity.debug);
-                });
-
->>>>>>> origin/master
 
 
             } else {
@@ -923,11 +780,7 @@ var self = {
 	// Handler for status changes
 	statusOffline: function(device_id) {
         var tokens = {'counter': countStatus};
-<<<<<<< HEAD
         if (fullLogging) util.wuLog("Sending trigger statusOffline without tokens.", severity.debug);
-=======
-        if (fullLogging) util.wuLog("statusOffline trigger starting...", severity.debug);
->>>>>>> origin/master
         Homey.manager('flow').triggerDevice('statusOffline', devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 		});
@@ -935,11 +788,7 @@ var self = {
     },
 	statusOnline: function(device_id) {
         var tokens = {'counter': countStatus};
-<<<<<<< HEAD
         if (fullLogging) util.wuLog("Sending trigger statusOnline without tokens", severity.debug);
-=======
-        if (fullLogging) util.wuLog("statusOnline trigger starting...", severity.debug);
->>>>>>> origin/master
         Homey.manager('flow').triggerDevice('statusOnline', devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 		});
@@ -947,7 +796,6 @@ var self = {
     },
 
     // Handler for cooktemp status changes
-<<<<<<< HEAD
     // Cook
     cooktempChanged: function(name, temp, set, status, device_id) {
         var tokens = {'name': name, 'temp': temp, 'set': set, 'status': status};
@@ -959,18 +807,11 @@ var self = {
     cookstatusChanged: function(name, temp, set, status, device_id) {
         var tokens = {'name': name, 'temp': temp, 'set': set, 'status': status};
         if (fullLogging) util.wuLog("Sending trigger cookstatusChanged with tokens: " + JSON.stringify(tokens), severity.debug);
-=======
-    cookstatusChanged: function(name, temp, set, status, device_id) {
-	    if (fullLogging) util.wuLog('', severity.debug);
-        var tokens = {'name': name, 'temp': temp, 'set': set, 'status': status};
-        if (fullLogging) util.wuLog("cookstatusChanged trigger starting with tokens: " + JSON.stringify(tokens), severity.debug);
->>>>>>> origin/master
         Homey.manager('flow').triggerDevice('cookstatusChanged', tokens, devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 		});
 		
     },
-<<<<<<< HEAD
     // Food1
     food1tempChanged: function(name, temp, set, status, device_id) {
         var tokens = {'name': name, 'temp': temp, 'set': set, 'status': status};
@@ -1105,41 +946,6 @@ var self = {
         if (fullLogging) util.wuLog('Trigger setup for tempchanged started', severity.debug);
 
         
-=======
-    foodstatusChanged: function(device_id) {
-	    if (fullLogging) util.wuLog('', severity.debug);
-        if (fullLogging) util.wuLog('foodstatusChanged trigger starting...', severity.debug);
-        Homey.manager('flow').triggerDevice('foodstatusChanged', devices[device_id], function(err, result){
-		    if( err ) return Homey.error(err);
-		});
-    },
-
-    // Handler for all triggers that handle temperature changes
-    tempchanged: function(device_id) {
-        if (fullLogging) util.wuLog('', severity.debug);
-        if (fullLogging) util.wuLog('tempChanged triggers starting...', severity.debug);
-        
-        			Homey.manager('flow').triggerDevice('tempChanged', devices[device_id], function callback(err, success){
-				        if (fullLogging) util.wuLog('Trigger status: ' + success, severity.debug);
-					    if( err ) return Homey.error(err);
-					});
-			
-					Homey.manager('flow').triggerDevice('tempAbove', devices[device_id], function callback(err, success){
-				        if (fullLogging) util.wuLog('Trigger status: ' + success, severity.debug);
-					    if( err ) return Homey.error(err);
-					});
-
-					Homey.manager('flow').triggerDevice('tempBelow', devices[device_id], function callback(err, success){
-				        if (fullLogging) util.wuLog('Trigger status: ' + success, severity.debug);
-					    if( err ) return Homey.error(err);
-					});
-
-			        Homey.manager('flow').triggerDevice('tempRemaining', devices[device_id], function callback(err, success){
-				        if (fullLogging) util.wuLog('Trigger status: ' + success, severity.debug);
-					    if( err ) return Homey.error(err);
-					});
- /*       
->>>>>>> origin/master
         // We need to know the probe (cook/1/2/3), type (current or set), current temp or current settemp, args.temperature (input)
         // This is handled by the on.trigger part
         
@@ -1152,7 +958,6 @@ var self = {
 	        if (fullLogging) util.wuLog('Got tempchanged arguments', severity.debug);
 			if (fullLogging) util.wuLog(triggers, severity.debug);
 			
-<<<<<<< HEAD
 			
 					Homey.manager('flow').triggerDevice('tempAbove', devices[device_id], function callback(err, success){
 				        if (fullLogging) util.wuLog('Trigger status: ' + success, severity.debug);
@@ -1160,10 +965,6 @@ var self = {
 					});
 
 /*
-=======
-
-
->>>>>>> origin/master
 			triggers.forEach(trigger => {
 
                 // Check if all args are valid and present
@@ -1183,7 +984,6 @@ var self = {
                     
                 }
             });
-<<<<<<< HEAD
 */
 		});
         if (fullLogging) util.wuLog('Done getting arguments and triggering tempchanged', severity.debug);          
@@ -1292,83 +1092,21 @@ var self = {
         Homey.manager('flow').triggerDevice('timerleftAbove', tokens, devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 		});
-=======
-
-		});
-        if (fullLogging) util.wuLog('Done getting arguments and triggering tempchanged', severity.debug);    
-*/        
-              
-	},
-    // Handler for timerleft triggers and conditions
-    timerChanged: function(timerleft, device_id) {
-        if (fullLogging) util.wuLog('', severity.debug);
-        if (fullLogging) util.wuLog('timerChanged triggers starting...', severity.debug);
-
-        var tokens = {'timerleft': timerleft};
->>>>>>> origin/master
 
         Homey.manager('flow').triggerDevice('timerleftBelow', tokens, devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 		});
 		
-<<<<<<< HEAD
 		if (fullLogging) util.wuLog('timerleft: ' + timerleft, severity.debug);
 		if (fullLogging) util.wuLog('oldTimerleft' + oldTimerleft, severity.debug);
 		if (timerleft == 0 && oldTimerleft >= 1) {
 			// No arguments, so no 'on.trigger' needed. Just ring the bells!
 			util.wuLog('Current timerleft of ' + timerleft + ' is equal to 0. oldTimerleft is ' + oldTimerleft + ' and not equal to 0', severity.debug);
-=======
-
-		
-		if (timerleft == 0 && oldTimerleft >= 1) {
-			// No arguments, so no 'on.trigger' needed. Just ring the bells!
-			util.wuLog('Current timerleft of ' + timerleft + ' is equal to 0. oldTimerleft is ' + oldTimerleft + ' and not equal to 0', severity.debug);
-			
-			var timerHR = util.parseCyberqTimerHR(cyberqData.timerleft);
-			var done = util.parseTimerDone(cyberqData.timerleft);
-			
-		    var tokens = {'hours': timerHR.hours, 'minutes': timerHR.minutes, 'seconds': timerHR.seconds, 'done': done};
-			
->>>>>>> origin/master
 			Homey.manager('flow').triggerDevice('timerleftAlarm', tokens, devices[device_id], function(err, result){
 		    if( err ) return Homey.error(err);
 			});
 		}
-<<<<<<< HEAD
 
-=======
-		
-	    if (util.value_exist(oldtimerTrigger['activated'])) {
-		    // checked before
-		    util.wuLog('Active timer was already triggered, refreshing...', severity.debug);
-	        if (cyberqData.timerleft == 0) {
-	        	delete oldtimerTrigger['activated'];
-				util.wuLog('Trigger has been reset', severity.debug);
-			} else {
-				util.wuLog('Nothing changed', severity.debug);
-			}
-        }
-        else {
-	        if (cyberqData.timerleft != 0) {
-	        	oldtimerTrigger['activated'] = cyberqData.timerleft;
-				util.wuLog('Timer was activated', severity.debug);
-				util.wuLog(JSON.stringify(oldtimerTrigger), severity.debug);
-				
-				var timerHR = util.parseCyberqTimerHR(cyberqData.timerleft);
-				var done = util.parseTimerDone(cyberqData.timerleft);
-				
-			    var tokens = {'hours': timerHR.hours, 'minutes': timerHR.minutes, 'seconds': timerHR.seconds, 'done': done};
-			
-		        Homey.manager('flow').triggerDevice('timerActivated', tokens, devices[device_id], function(err, result){
-				    if( err ) return Homey.error(err);
-				});		
-		
-			} else {
-				util.wuLog('Timer is not activated', severity.debug);
-				
-			}
-	    }
->>>>>>> origin/master
 
     },
 
@@ -1768,7 +1506,6 @@ function registerTriggerAndConditionListeners() {
     
 	// Triggers
     Homey.manager('flow').on('trigger.statusOnline', statusOnline);
-<<<<<<< HEAD
     
     Homey.manager('flow').on('trigger.tempAbove', tempAboveTrigger);
     
@@ -1845,26 +1582,6 @@ function registerTriggerAndConditionListeners() {
 
     Homey.manager('flow').on('condition.timerleftAbove', timerleftAbove);
     Homey.manager('flow').on('condition.timerleftBelow', timerleftBelow);
-=======
-    Homey.manager('flow').on('trigger.statusOffline', statusOffline);
-	Homey.manager('flow').on('trigger.tempChanged', tempChangedTrigger);    
-    Homey.manager('flow').on('trigger.tempAbove', tempAboveTrigger);
-	Homey.manager('flow').on('trigger.tempBelow', tempBelowTrigger);
-    Homey.manager('flow').on('trigger.tempRemaining', tempRemainingTrigger);
-    Homey.manager('flow').on('trigger.cookstatusChanged', cookstatusChangedTrigger);
-    Homey.manager('flow').on('trigger.foodstatusChanged', foodstatusChangedTrigger);
-    Homey.manager('flow').on('trigger.timerleftBelow', timerleftBelowTrigger);
-
-	// Conditions
-    Homey.manager('flow').on('condition.statusOnline', statusOnline);
-    Homey.manager('flow').on('condition.probeName', probeNameCondition);
-    Homey.manager('flow').on('condition.tempAboveBelow', tempAboveBelow);
-    Homey.manager('flow').on('condition.tempRemaining', tempRemainingCondition);
-    Homey.manager('flow').on('condition.cookStatus', cookstatusChanged);
-    Homey.manager('flow').on('condition.foodStatus', foodstatusChanged);
-    Homey.manager('flow').on('condition.fanoutputAboveBelow', fanoutputAbove);
-    Homey.manager('flow').on('condition.timerleftAboveBelow', timerleftAbove);
->>>>>>> origin/master
     
     //Actions
     Homey.manager('flow').on('action.nameSet', nameSet);
@@ -1883,7 +1600,6 @@ function registerTriggerAndConditionListeners() {
     Homey.manager('flow').on('action.opendetectSet', opendetectSet);
     Homey.manager('flow').on('action.mailportSet', mailportSet);
    
-<<<<<<< HEAD
     
     //Homey.manager('flow').on('trigger.timerleftAlarm', timerleftAlarm);
     
@@ -1893,10 +1609,6 @@ function registerTriggerAndConditionListeners() {
     //Homey.manager('flow').on('action.readForecast_tonight', readForecast_tonight);
 
 	// Function to check if the CyberQ is online or not (trigger does not have tokens, so is merged with offline)
-=======
-	// Function to check if the CyberQ is online or not
-	// used for both Trigger and Condition (real check is in self.update function)
->>>>>>> origin/master
     function statusOnline(callback) {
         if (cyberqData.status == 'online') {
             util.wuLog('Current status is online', severity.debug);
@@ -1907,7 +1619,6 @@ function registerTriggerAndConditionListeners() {
 	        callback(null, false);
 	    }
     }
-<<<<<<< HEAD
 
 	// Function used for checking conditions with dropdown probe selection
     function tempAboveBelow(callback, args) {
@@ -1959,58 +1670,10 @@ function registerTriggerAndConditionListeners() {
 
 
 	// Temp above trigger validation
-=======
-    
-    // Offline status trigger
-    // Real check is in self.update, will trigger only once after being offline multiple times
-    function statusOffline(callback) {
-        if (cyberqData.status == 'offline') {
-            util.wuLog('Current status is offline', severity.debug);
-            callback(null, true);
-        }
-        else {
-	        util.wuLog('Current status is online', severity.debug);
-	        callback(null, false);
-	    }
-    }  
-    
-    // Temp changed trigger validation (sets reference point)
-    function tempChangedTrigger(callback, args) {
-	    util.wuLog('tempChangedTrigger arguments: ' + JSON.stringify(args), severity.debug);
-		
-	    // First check if we have a reference point
-	    if (util.value_exist(oldtempTrigger[args.probe+args.difference])) {
-			// Since we run before, we can check if the difference is large enough
-		    util.wuLog('Reference found, checking delta...', severity.debug);
-		    
-		    var difference = util.diff(cyberqData[args.probe],oldtempTrigger[args.probe+args.difference]);
-		    if (difference < args.difference) {
-			    util.wuLog('Reference is to close to current temp (false): ' + difference + ' is less than ' + args.difference, severity.debug);
-			    return callback(null, false);
-		    } else {
-			    util.wuLog('Reference is far enough from current temp (true): ' + difference + ' is more than or equal to ' + args.difference, severity.debug);
-			    // updating reference point
-				oldtempTrigger[args.probe+args.difference] = cyberqData[args.probe];
-				return callback(null, true);
-			    
-		    }
-		} else {
-			util.wuLog('Trigger not run before, saving reference point for next run', severity.debug);
-			// we need to know a reference point
-			oldtempTrigger[args.probe+args.difference] = cyberqData[args.probe];
-			
-			// For now we answer 'false', will check next time
-			return callback(null, false);
-		}
-    }
-
-	// Temp above trigger validation (remembers if run before)
->>>>>>> origin/master
     function tempAboveTrigger(callback, args) {
 	    util.wuLog('TEST trigger validation: ' + JSON.stringify(args), severity.debug);
 	    // lets make a treshold we should pass to trigger
 		var treshold = args.temperature;
-<<<<<<< HEAD
 		
 /*
 		if (util.value_exist(cyberqdata[args.probename][args.probetype]['tempabove'+treshold+cyberqData.cookset])) {
@@ -2021,8 +1684,6 @@ function registerTriggerAndConditionListeners() {
 		    }
 		}
 */
-=======
->>>>>>> origin/master
 	    // First make sure we never run before
 	    if (util.value_exist(oldtempTrigger[args.probe+args.temperature])) {
 			// Since we run before, we want to make sure there is a real difference before triggering again
@@ -2038,12 +1699,9 @@ function registerTriggerAndConditionListeners() {
 	    else {
 		    util.wuLog('Trigger not run before, or is reset because of too low temperature', severity.debug);
 		}
-<<<<<<< HEAD
 
 		
 //		if (cyberqData[args.probename]['old'+args.probetype] < cyberqData[args.probename+args.probetype] && cyberqData[args.probename+args.probetype] > treshold) {
-=======
->>>>>>> origin/master
 		if (cyberqData[args.probe] >= treshold) {
 			util.wuLog('true: current temp ' + cyberqData[args.probe] + ' is higher than or equal to treshold ' + treshold, severity.debug);
 //			util.wuLog('old temp lower than current AND current temp is higher than treshold', severity.debug);
@@ -2052,7 +1710,6 @@ function registerTriggerAndConditionListeners() {
 		}
 		else {
 			util.wuLog('false: current temp ' + cyberqData[args.probe] + '  is lower than treshold ' + treshold, severity.debug);
-<<<<<<< HEAD
 			//util.wuLog('old temp ' + cyberqData[args.probename]['old'+args.probetype] + ' higher than current ' + cyberqData[args.probename+args.probetype] + ' OR current temp ' + cyberqData[args.probename+args.probetype] + '  is lower than treshold' + treshold, severity.debug);
 			callback(null, false);
 			
@@ -2060,57 +1717,14 @@ function registerTriggerAndConditionListeners() {
     }
     
      function tempRemainingTrigger(callback, args) {
-=======
-			callback(null, false);			
-		}
-    }
-    
-	// Temp above trigger validation (remembers if run before)
-    function tempBelowTrigger(callback, args) {
-	    util.wuLog('TEST trigger validation: ' + JSON.stringify(args), severity.debug);
-	    // lets make a treshold we should pass to trigger
-		var treshold = args.temperature;
-	    // First make sure we never run before
-	    if (util.value_exist(oldtempTrigger[args.probe+args.temperature])) {
-			// Since we run before, we want to make sure there is a real difference before triggering again
-		    util.wuLog('We already triggered this one before. Creating safe trigger zone (treshold + 2)', severity.debug);
-			treshold = treshold + 2;
-		    if (cyberqData[args.probe] <= treshold) {
-			    util.wuLog('temp is still within in the last (safe) trigger zone: ' + cyberqData[args.probe] + ' is less than or equal to ' + treshold, severity.debug);
-			    return callback(null, false);
-		    }
-		util.wuLog('But temp is no longer within in the last (safe) trigger zone: ' + cyberqData[args.probe] + ' is more than ' + treshold +'. Lets try again!', severity.debug);
-		delete oldtempTrigger[args.probe+args.temperature];
-	    }
-	    else {
-		    util.wuLog('Trigger not run before, or is reset because of too low temperature', severity.debug);
-		}
-		if (cyberqData[args.probe] <= treshold) {
-			util.wuLog('true: current temp ' + cyberqData[args.probe] + ' is lower than or equal to treshold ' + treshold, severity.debug);
-//			util.wuLog('old temp lower than current AND current temp is higher than treshold', severity.debug);
-			oldtempTrigger[args.probe+args.temperature] = cyberqData[args.probe];
-		    callback(null, true);
-		}
-		else {
-			util.wuLog('false: current temp ' + cyberqData[args.probe] + '  is higher than treshold ' + treshold, severity.debug);
-			callback(null, false);			
-		}
-    }
-    // Validation for tempRemaining trigger (remembers if run before)
-    function tempRemainingTrigger(callback, args) {
->>>>>>> origin/master
 	    // lets make an universal treshold we should pass to trigger
 	    var probe = args.probename;
 	    var variable = args.variable;
 	    var type = args.type;
 	    var temp = cyberqData[args.probename+'temp'];
 	    var set = cyberqData[args.probename+'set'];
-<<<<<<< HEAD
 	    
 	    
-=======
-
->>>>>>> origin/master
 	    if (type == 'degrees') {
 		    var treshold = set - variable;
 	    }
@@ -2141,7 +1755,6 @@ function registerTriggerAndConditionListeners() {
             callback(null, true);
         } 
 		else {
-<<<<<<< HEAD
 	        util.wuLog('Current ctemp of ' + temp + ' is not within '  + variable + ' ' + type + ' of ' + set, severity.debug);
 	        callback(null, false);
 	    }	 
@@ -2409,103 +2022,10 @@ function registerTriggerAndConditionListeners() {
         }
         else {
 	        util.wuLog('Current value of food2status is not equal to ' + args.status, severity.debug);
-=======
-	        util.wuLog('Current temp of ' + temp + ' is not within '  + variable + ' ' + type + ' of ' + set, severity.debug);
-	        callback(null, false);
-	    }	 
-    } 
-
-	// cookstatus trigger validation
-    function cookstatusChangedTrigger(callback, args) {
-	    util.wuLog('cookstatusChangedTrigger arguments: ' + JSON.stringify(args), severity.debug);
-	    if (util.value_exist(oldstatusTrigger['cook'+args.status])) {
-		    // checked before
-		    util.wuLog('Reference status found, compairing... ', severity.debug);
-	        if (cyberqData.cookstatus == args.status && oldstatusTrigger['cook'+args.status] != args.status) {
-	        	oldstatusTrigger['cook'+args.status] = args.status;
-				util.wuLog('New status: ' + args.status, severity.debug);
-				callback(null, true);
-			} else {
-				util.wuLog('Still the same status: ' + args.status, severity.debug);
-				callback(null, false);
-			}
-        }
-        else {
-	        // Saving current status, will check again
-	        oldstatusTrigger['cook'+args.status] = cyberqData.cookstatus;
-	        util.wuLog('Never run before, saving current status as reference: ' + cyberqData.cookstatus, severity.debug);
-	        callback(null, false);
-	    }
-    }   
-
-	// foodstatus trigger validation
-    function foodstatusChangedTrigger(callback, args) {
-	    util.wuLog('foodstatusChangedTrigger arguments: ' + JSON.stringify(args), severity.debug);
-	    if (util.value_exist(oldstatusTrigger[args.probename+args.status])) {
-		    // checked before
-		    util.wuLog('Reference status found, compairing... ', severity.debug);
-	        if (cyberqData[args.probename+'status'] == args.status && oldstatusTrigger[args.probename+args.status] != args.status) {
-	        	oldstatusTrigger[args.probename+args.status] = args.status;
-				util.wuLog('New status: ' + args.status, severity.debug);
-				callback(null, true);
-			} else {
-				util.wuLog('Still the same status: ' + args.status, severity.debug);
-				callback(null, false);
-			}
-        }
-        else {
-	        // Saving current status, will check again
-	        oldstatusTrigger[args.probename+args.status] = cyberqData[args.probename+'status'];
-	        util.wuLog('Never run before, saving current status as reference: ' + cyberqData[args.probename+'status'], severity.debug);
-	        callback(null, false);
-	    }
-    }   
-    
-    
- 	// Timer below trigger validation
-    function timerleftBelowTrigger(callback, args) {
-	    var treshold = args.variable;
-
-	    if (util.value_exist(oldtimerTrigger['below'+treshold])) {
-		    // checked before
-		    util.wuLog('TimerleftBelow was already triggered, refreshing...', severity.debug);
-	        if (cyberqData.timerleft == 0 || cyberqData.timerleft > treshold || cyberqData.timerleft > oldTimerleft) {
-	        	delete oldtimerTrigger['below'+treshold];
-				util.wuLog('Trigger has been reset (is now 0, or has been changed)', severity.debug);
-				callback(null, false);
-			} else {
-				util.wuLog('Timer is still below treshold: ' + treshold, severity.debug);
-				callback(null, false);
-			}
-        }
-        else {
-	        if (cyberqData.timerleft <= treshold) {
-	        	oldtimerTrigger['below'+treshold] = cyberqData.timerleft;
-				util.wuLog('Timer is now below ' + treshold, severity.debug);
-				callback(null, true);
-			} else {
-				util.wuLog('Timer is still above ' + treshold, severity.debug);
-				callback(null, false);
-				
-			}
-	    }
-    }        
-    
-    
-	// Validation for probeNameCondition
-    function probeNameCondition(callback, args) {
-        if (cyberqData[args.probename] == args.name) {
-            util.wuLog('Probename ' + cyberqData[args.probename] + ' is equal to ' + args.name, severity.debug);
-            callback(null, true);
-        }
-        else {
-	        util.wuLog('Probename ' + cyberqData[args.probename] + ' is not equal to ' + args.name, severity.debug);
->>>>>>> origin/master
 	        callback(null, false);
 	    }
     }    
     
-<<<<<<< HEAD
 	// food3temp trigger validation
     function food3tempAbove(callback, args) {
         if (cyberqData.food3temp > args.variable) {
@@ -2592,70 +2112,6 @@ function registerTriggerAndConditionListeners() {
 	    }
     }    
     
-=======
-	// Function used for checking conditions with dropdown probe selection
-    function tempAboveBelow(callback, args) {
-	    
-	    util.wuLog(args.probename+args.probetype + ' ' + args.variable, severity.debug);
-        if (cyberqData[args.probename+args.probetype] > args.variable) {
-            util.wuLog('Current temp of ' + args.probename+args.probetype + ' is higher then trigger value of ' + args.variable, severity.debug);
-            callback(null, true);
-        }
-        else {
-	        util.wuLog('Current temp of ' + args.probename+args.probetype + ' is lower then trigger value of ' + args.variable, severity.debug);
-	        callback(null, false);
-	    }
-    }    
- 
- 	// Function used for checking conditions with dropdown probe selection
-    function foodstatusChanged(callback, args) {
-        if (cyberqData[args.probe] == args.status) {
-            util.wuLog('Current value of ' + args.probe + ' is equal to ' + args.status, severity.debug);
-            callback(null, true);
-        }
-        else {
-	        util.wuLog('Current value of ' + args.probe + ' is not equal to ' + args.status, severity.debug);
-	        callback(null, false);
-	    }
-    }   
-  	
-	// Validation for tempRemaining condition (does NOT remember if run before)
-    function tempRemainingCondition(callback, args) {
-	    
-	    // lets make an universal treshold we should pass to trigger
-	    if (args.type == 'degrees') {
-		    var treshold = cyberqData[args.probename+'set'] - args.variable;
-	    }
-		else if (args.type == 'percent') {
-			var treshold = Math.round(cyberqData[args.probename+'set'] - (cyberqData[args.probename+'set'] * args.variable / 100));
-		}
-	    util.wuLog('Continue if temp is lower than treshold: ' + treshold, severity.debug);
-	    		
-		// Start real trigger
-    	if (cyberqData[args.probename+'temp'] >= treshold) {
-            util.wuLog('Current temp of ' + args.probename + ' is within ' + args.variable + ' ' + args.type + ' of ' + cyberqData[args.probename+'set'], severity.debug);
-            callback(null, true);
-        } 
-		else {
-	        util.wuLog('Current temp of ' + args.probename + ' is not within '  + args.variable + ' ' + args.type + ' of ' + cyberqData[args.probename+'set'], severity.debug);
-	        callback(null, false);
-	    }	 
-
-    } 
-
-	// cookstatus condition validation
-    function cookstatusChanged(callback, args) {
-        if (cyberqData.cookstatus == args.status) {
-            util.wuLog('Current value of cookstatus is equal to ' + args.status, severity.debug);
-            callback(null, true);
-        }
-        else {
-	        util.wuLog('Current value of cookstatus is not equal to ' + args.status, severity.debug);
-	        callback(null, false);
-	    }
-    }    
-   
->>>>>>> origin/master
 	// fanoutput trigger validation
     function fanoutputAbove(callback, args) {
         if (cyberqData.fanoutput > args.variable) {
@@ -2677,11 +2133,7 @@ function registerTriggerAndConditionListeners() {
 
 	// timerleft trigger validation
     function timerleftAbove(callback, args) {
-<<<<<<< HEAD
         if (cyberqData.timerleft > args.variable && oldTimerleft < args.variable) {
-=======
-        if (cyberqData.timerleft > args.variable) {
->>>>>>> origin/master
             util.wuLog('Current timerleft of ' + cyberqData.timerleft + ' is higher then trigger value of ' + args.variable, severity.debug);
             callback(null, true);
         }
@@ -2692,22 +2144,13 @@ function registerTriggerAndConditionListeners() {
     }
 
     function timerleftBelow(callback, args) {
-<<<<<<< HEAD
         if (cyberqData.timerleft < args.variable && oldTimerleft > args.variable) {
-=======
-        if (cyberqData.timerleft < args.variable) {
->>>>>>> origin/master
             util.wuLog('Current timerleft of ' + cyberqData.timerleft + ' is lower then trigger value of ' + args.variable, severity.debug);
             callback(null, true);
         }
         else callback(null, false);
     }
-<<<<<<< HEAD
     
-=======
-
-	// Handler for setting probe name    
->>>>>>> origin/master
     function nameSet(callback, args) {
         if (cyberqData[args.probe+'name'] != args.name) {
 	        var data = querystring.stringify({
@@ -2732,11 +2175,7 @@ function registerTriggerAndConditionListeners() {
         }
         else callback(null, false);
     }
-<<<<<<< HEAD
     
-=======
-    // Handler for setting probe target temp
->>>>>>> origin/master
     function targetSet(callback, args) {
 	    var temp = util.parseTenthsF (args.temperature, units_metric);
         if (cyberqData[args.probe+'set'] != args.temperature) {
@@ -2762,11 +2201,7 @@ function registerTriggerAndConditionListeners() {
         }
         else callback(null, false);
     }
-<<<<<<< HEAD
     
-=======
-    // Handler to set timer
->>>>>>> origin/master
     function timerSet(callback, args) {
 	    var timer = args.hours+':'+args.minutes+':'+args.seconds;
 	    var data = querystring.stringify({'cook_timer': timer});
@@ -2783,11 +2218,7 @@ function registerTriggerAndConditionListeners() {
 		    }
         });
     }
-<<<<<<< HEAD
     
-=======
-    // Handler to set scrolling percentage
->>>>>>> origin/master
     function scrollingSet(callback, args) {
 	    var data = querystring.stringify({'MENU_SCROLLING': args.onoff});
 	    var page = 'system.htm';
@@ -2802,10 +2233,6 @@ function registerTriggerAndConditionListeners() {
 		    }
         });
     }
-<<<<<<< HEAD
-=======
-    // Handler to set alarmbeep
->>>>>>> origin/master
     function alarmbeepSet(callback, args) {
 	    var data = querystring.stringify({'ALARM_BEEPS': args.beep});
 	    var page = 'system.htm';
@@ -2963,7 +2390,6 @@ function registerTriggerAndConditionListeners() {
 		    }
         });
     }
-<<<<<<< HEAD
     
     
     
@@ -2983,13 +2409,6 @@ function registerTriggerAndConditionListeners() {
 function postForm (data, page, callback) {
 
 
-=======
-}
-
-// Helper function to post data to CyberQ
-function postForm (data, page, callback) {
-
->>>>>>> origin/master
 	var options = {
 	  method: 'post',
 	  body: data,
@@ -3020,13 +2439,9 @@ function postForm (data, page, callback) {
 	
 }
 
-<<<<<<< HEAD
 /**
  * Helper function to register the unload of the app
  */
-=======
-// Helper function to register the unload of the app
->>>>>>> origin/master
 function registerWarningAndPerformanceListeners() {
     try {
         util.wuLog("Registering app unload listener", severity.debug);
@@ -3036,7 +2451,6 @@ function registerWarningAndPerformanceListeners() {
     }
 }
 
-<<<<<<< HEAD
 /*
 function parseSpeech(speech, callback) {
     util.wuLog("", severity.debug);
@@ -3144,8 +2558,6 @@ function parseSpeech(speech, callback) {
 }
 */
 
-=======
->>>>>>> origin/master
 function triggerError(errorMsg) {
     if (useErrorNotifications) sendNotification(errorMsg);
 
@@ -3153,14 +2565,10 @@ function triggerError(errorMsg) {
     Homey.manager('flow').trigger('error', tokens);
 }
 
-<<<<<<< HEAD
 /**
  * Sends a notification to Homey's notification center
  * @param text Text to send
  */
-=======
-// Sends a notification to Homey's notification center
->>>>>>> origin/master
 function sendNotification(text) {
     Homey.manager('notifications').createNotification({
         excerpt: text
@@ -3170,16 +2578,12 @@ function sendNotification(text) {
     });
 }
 
-<<<<<<< HEAD
 /**
  * Helper function to test the Weather Underground response
  * @param err
  * @param result
  * @returns {boolean} True is everything is fine
  */
-=======
-// Helper function to test the response
->>>>>>> origin/master
 function testResponse(err, result){
 
     if (err) return true;
@@ -3197,24 +2601,3 @@ function testResponse(err, result){
         return false;
     }
 }
-<<<<<<< HEAD
-=======
-
-function getcqsettings(device) {
-			util.wuLog("Device: " + JSON.stringify(device), severity.debug);
-			util.wuLog("Devices: " + JSON.stringify(devices), severity.debug);
-
-	        module.exports.getSettings(device, function(err, settings){
-	        util.wuLog("Settings (raw): " + JSON.stringify(settings), severity.debug);
-			util.wuLog("Devices (2): " + JSON.stringify(devices), severity.debug);	        
-	        if (typeof devices[device.id].settings === 'undefined') 
-				{
-	            	devices[device.id].settings = [];  
-	         	}
-            util.wuLog("Settings (empty) " + JSON.stringify(devices[device.id].settings), severity.debug);
-            devices[device.id].settings = settings;
-            util.wuLog("Settings (in devices object) " + JSON.stringify(devices[device.id].settings), severity.debug);
-            if( err ) return Homey.error(err);
-        });
-}
->>>>>>> origin/master

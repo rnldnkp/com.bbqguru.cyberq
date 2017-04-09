@@ -51,7 +51,6 @@
 				}]  
 	        },
        		{
-<<<<<<< HEAD
 	            "id": "cooktempChanged",
 	            "title": {
 	                "en": "BBQ temperature has changed",
@@ -106,12 +105,6 @@
 	            "title": {
 	                "en": "is above .. degrees",
 	                "nl": "is hoger dan .. graden"
-=======
-	            "id": "tempChanged",
-	            "title": {
-	                "en": "has changed .. degrees",
-	                "nl": "is .. graden veranderd"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -138,11 +131,7 @@
 						]
 					},
 					{
-<<<<<<< HEAD
 		                "name": "temperature",
-=======
-		                "name": "difference",
->>>>>>> origin/master
 		                "type": "number",
 		                "placeholder" :
 		                 	{
@@ -153,17 +142,10 @@
 				]
 	        },
 	        {
-<<<<<<< HEAD
 	            "id": "tempRemaining",
 	            "title": {
 	                "en": "within .. from target",
 	                "nl": "minder dan .. van doel"
-=======
-	            "id": "tempAbove",
-	            "title": {
-	                "en": "is above .. degrees",
-	                "nl": "is hoger dan .. graden"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -172,7 +154,6 @@
 						"filter": "driver_id=cyberq"
 					},
 					{
-<<<<<<< HEAD
 						"name": "probename",
 						"type": "dropdown",
 						"values": [ 
@@ -186,27 +167,11 @@
 								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
 							} ,
 							{ "id": "food3", 
-=======
-						"name": "probe",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "cooktemp", 
-								"label": { "en": "BBQ", "nl": "BBQ"} 
-							} ,
-							{ "id": "food1temp", 
-								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
-							} ,
-							{ "id": "food2temp", 
-								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
-							} ,
-							{ "id": "food3temp", 
->>>>>>> origin/master
 								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
 							}
 						]
 					},
 					{
-<<<<<<< HEAD
 		                "name": "variable",
 		                "type": "number",
 		                "placeholder" :
@@ -243,9 +208,6 @@
 					},
 					{
 		                "name": "variable",
-=======
-		                "name": "temperature",
->>>>>>> origin/master
 		                "type": "number",
 		                "placeholder" :
 		                 	{
@@ -253,7 +215,6 @@
 			                    "nl": "graden"
 		                  	}
 					}
-<<<<<<< HEAD
 				],
 	            "tokens": [{
 	                "name": "name",
@@ -298,15 +259,6 @@
 	            "title": {
 	                "en": "BBQ temperature is below",
 	                "nl": "BBQ temperatuur lager dan"
-=======
-				]
-	        },
-	        {
-	            "id": "tempBelow",
-	            "title": {
-	                "en": "is below .. degrees",
-	                "nl": "is lager dan .. graden"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -315,7 +267,6 @@
 						"filter": "driver_id=cyberq"
 					},
 					{
-<<<<<<< HEAD
 		                "name": "variable",
 		                "type": "number",
 		                "placeholder" :
@@ -943,41 +894,6 @@
 	            "title": {
 	                "en": "Food 3 within .. from target",
 	                "nl": "Voedsel 3 minder dan .. van doel"
-=======
-						"name": "probe",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "cooktemp", 
-								"label": { "en": "BBQ", "nl": "BBQ"} 
-							} ,
-							{ "id": "food1temp", 
-								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
-							} ,
-							{ "id": "food2temp", 
-								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
-							} ,
-							{ "id": "food3temp", 
-								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
-							}
-						]
-					},
-					{
-		                "name": "temperature",
-		                "type": "number",
-		                "placeholder" :
-		                 	{
-			                    "en": "degrees",
-			                    "nl": "graden"
-		                  	}
-					}
-				]
-	        },
-	        {
-	            "id": "tempRemaining",
-	            "title": {
-	                "en": "within .. from target",
-	                "nl": "minder dan .. van doel"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -986,27 +902,6 @@
 						"filter": "driver_id=cyberq"
 					},
 					{
-<<<<<<< HEAD
-=======
-						"name": "probename",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "cook", 
-								"label": { "en": "BBQ", "nl": "BBQ"} 
-							} ,
-							{ "id": "food1", 
-								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
-							} ,
-							{ "id": "food2", 
-								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
-							} ,
-							{ "id": "food3", 
-								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
-							}
-						]
-					},
-					{
->>>>>>> origin/master
 		                "name": "variable",
 		                "type": "number",
 		                "placeholder" :
@@ -1027,7 +922,6 @@
 							} 
 						]
 					}
-<<<<<<< HEAD
 				],
 	            "tokens": [{
 	                "name": "name",
@@ -1074,15 +968,6 @@
 	            "title": {
 	                "en": "Food 3 status has changed to",
 	                "nl": "Voedsel 3 status veranderde naar"
-=======
-				] 
-	        },
-	        {
-	            "id": "cookstatusChanged",
-	            "title": {
-	                "en": "BBQ Status has changed to",
-	                "nl": "BBQ Status veranderde naar"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -1097,22 +982,11 @@
 							{ "id": "0", 
 								"label": { "en": "OK", "nl": "Ok"} 
 							} ,
-<<<<<<< HEAD
 							{ "id": "3", 
 								"label": { "en": "Done", "nl": "Klaar"} 
 							} ,
 							{ "id": "4", 
 								"label": { "en": "Error", "nl": "Error"} 
-=======
-							{ "id": "1", 
-								"label": { "en": "High", "nl": "Hoog"} 
-							} ,
-							{ "id": "2", 
-								"label": { "en": "Low", "nl": "Laag"} 
-							} ,
-							{ "id": "4", 
-								"label": { "en": "Error 3", "nl": "Error"} 
->>>>>>> origin/master
 							}
 						]
 					}
@@ -1154,21 +1028,12 @@
 	           
 	           }
 	           ]
-<<<<<<< HEAD
 	        },
 	        {
 	            "id": "fanoutputAbove",
 	            "title": {
 	                "en": "Fan output is above",
 	                "nl": "Fan vermogen hoger dan"
-=======
-	        },	        
-	        {
-	            "id": "foodstatusChanged",
-	            "title": {
-	                "en": "status has changed to",
-	                "nl": "status veranderde naar"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -1177,7 +1042,6 @@
 						"filter": "driver_id=cyberq"
 					},
 					{
-<<<<<<< HEAD
 		                "name": "variable",
 		                "type": "number",
 		                "placeholder" :
@@ -1203,51 +1067,12 @@
 	            "title": {
 	                "en": "Fan output is below",
 	                "nl": "Fan vermogen lager dan"
-=======
-						"name": "probename",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "food1", 
-								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
-							} ,
-							{ "id": "food2", 
-								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
-							} ,
-							{ "id": "food3", 
-								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
-							}
-						]
-					},
-					{
-						"name": "status",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "0", 
-								"label": { "en": "OK", "nl": "Ok"} 
-							} ,
-							{ "id": "3", 
-								"label": { "en": "Done", "nl": "Klaar"} 
-							} ,
-							{ "id": "4", 
-								"label": { "en": "Error", "nl": "Error"} 
-							}
-						]
-					}
-				]
-	        },
-	        {
-	            "id": "timerActivated",
-	            "title": {
-	                "en": "Timer has been actived",
-	                "nl": "Timer werd ingesteld"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
 						"name": "device",
 						"type": "device",
 						"filter": "driver_id=cyberq"
-<<<<<<< HEAD
 					},
 					{
 		                "name": "variable",
@@ -1301,43 +1126,6 @@
 	                }
 	           
 	            }
-=======
-					}
-				],
-	            "tokens": [{
-	                "name": "hours",
-	                "type": "number",
-	                "title": {
-	                    "en": "hour",
-	                    "nl": "uur"
-	                }
-	           
-	            },
-	            {
-	                "name": "minutes",
-	                "type": "number",
-	                "title": {
-	                    "en": "minutes",
-	                    "nl": "minuten"
-	                }		            
-	            },
-	            {
-	                "name": "seconds",
-	                "type": "number",
-	                "title": {
-	                    "en": "seconds",
-	                    "nl": "seconden"
-	                }		            
-	            },
-	            {
-	                "name": "done",
-	                "type": "string",
-	                "title": {
-	                    "en": "endtime",
-	                    "nl": "eindtijd"
-	                }		            
-	            }           	 
->>>>>>> origin/master
 	           ]  
 	        },
 	        {
@@ -1363,7 +1151,6 @@
 					}
 				],
 	            "tokens": [{
-<<<<<<< HEAD
 	                "name": "timerleft",
 	                "type": "number",
 	                "title": {
@@ -1372,40 +1159,6 @@
 	                }
 	           
 	            }
-=======
-	                "name": "hours",
-	                "type": "number",
-	                "title": {
-	                    "en": "hour",
-	                    "nl": "uur"
-	                }
-	           
-	            },
-	            {
-	                "name": "minutes",
-	                "type": "number",
-	                "title": {
-	                    "en": "minutes",
-	                    "nl": "minuten"
-	                }		            
-	            },
-	            {
-	                "name": "seconds",
-	                "type": "number",
-	                "title": {
-	                    "en": "seconds",
-	                    "nl": "seconden"
-	                }		            
-	            },
-	            {
-	                "name": "done",
-	                "type": "string",
-	                "title": {
-	                    "en": "endtime",
-	                    "nl": "eindtijd"
-	                }		            
-	            }        
->>>>>>> origin/master
 	           ]   
 	        },
 	        {
@@ -1420,7 +1173,6 @@
 						"type": "device",
 						"filter": "driver_id=cyberq"
 					}
-<<<<<<< HEAD
 				],
 	            "tokens": [{
 	                "name": "timerleft",
@@ -1432,9 +1184,6 @@
 	           
 	            }
 	           ]   
-=======
-				]
->>>>>>> origin/master
 	        }
         ],
 		"conditions": [
@@ -1451,58 +1200,10 @@
 				}]  
 	        },
 	        {
-<<<<<<< HEAD
 	            "id": "tempAboveBelow",
 	            "title": {
 	                "en": "Temperature is !{{above|below}}",
 	                "nl": "Temperatuur !{{hoger|lager}} dan"
-=======
-	            "id": "probeName",
-	            "title": {
-	                "en": ".. name is !{{|not}} equal to",
-	                "nl": ".. naam is !{{|niet}} gelijk aan"
-	            },
-				"args": [
-					{
-						"name": "device",
-						"type": "device",
-						"filter": "driver_id=cyberq"
-					},
-					{
-						"name": "probename",
-						"type": "dropdown",
-						"values": [ 
-							{ "id": "cookname", 
-								"label": { "en": "BBQ", "nl": "BBQ"} 
-							} ,
-							{ "id": "food1name", 
-								"label": { "en": "Food 1", "nl": "Voedsel 1"} 
-							} ,
-							{ "id": "food2name", 
-								"label": { "en": "Food 2", "nl": "Voedsel 2"} 
-							} ,
-							{ "id": "food3name", 
-								"label": { "en": "Food 3", "nl": "Voedsel 3"} 
-							}
-						]
-					},
-					{
-		                "name": "name",
-		                "type": "text",
-		                "placeholder" :
-		                 	{
-			                    "en": "name",
-			                    "nl": "naam"
-		                  	}
-					}
-				]
-	        },
-	        {
-	            "id": "tempAboveBelow",
-	            "title": {
-	                "en": ".. is !{{above|below}}",
-	                "nl": ".. !{{hoger|lager}} dan"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -1554,13 +1255,8 @@
 	        {
 	            "id": "tempRemaining",
 	            "title": {
-<<<<<<< HEAD
 	                "en": "!{{|not}} within .. from target",
 	                "nl": "!{{minder|meer}} dan .. van doel"
-=======
-	                "en": ".. !{{|not}} within .. from target",
-	                "nl": ".. !{{minder|meer}} dan .. van doel"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -1645,13 +1341,8 @@
 	        {
 	            "id": "foodStatus",
 	            "title": {
-<<<<<<< HEAD
 	                "en": "Status is !{{|not}} equal to",
 	                "nl": "Status is !{{|niet}} gelijk aan"
-=======
-	                "en": ".. status is !{{|not}} equal to",
-	                "nl": ".. status is !{{|niet}} gelijk aan"
->>>>>>> origin/master
 	            },
 				"args": [
 					{
@@ -1692,7 +1383,6 @@
 				]
 	        },
 	        {
-<<<<<<< HEAD
 	            "id": "cooksetAbove",
 	            "title": {
 	                "en": "Set temperature is !{{above|below}}",
@@ -1735,9 +1425,6 @@
 	        },
 	        {
 	            "id": "fanoutputAbove",
-=======
-	            "id": "fanoutputAboveBelow",
->>>>>>> origin/master
 	            "title": {
 	                "en": "Fan output is !{{above|below}}",
 	                "nl": "Fan vermogen !{{hoger|lager}} dan"
@@ -1760,11 +1447,7 @@
 				]
 	        },
 	        {
-<<<<<<< HEAD
 	            "id": "timerleftAbove",
-=======
-	            "id": "timerleftAboveBelow",
->>>>>>> origin/master
 	            "title": {
 	                "en": "Timer is !{{more|less}} than",
 	                "nl": "Timer is !{{langer|korter}} dan"
@@ -2379,7 +2062,6 @@
 	                 "id": "cyberq_ip",
 	                 "type": "text",
 	                 "label": {
-<<<<<<< HEAD
 	                 "en": "IP address",
 	                 "nl": "IP adres"
 	                 },
@@ -2393,25 +2075,6 @@
 	                 },
 	                 "value": false
 	             }]
-=======
-		                 "en": "IP address",
-		                 "nl": "IP adres"
-	                 },
-	                 "value": ""
-	            }, {
-	                 "id": "cyberq_interval",
-	                 "type": "number",
-						"attr": {
-						    "min": 1,
-						    "max": 60
-						},
-	                 "label": {
-		                 "en": "Update interval",
-		                 "nl": "Update interval"
-	                 },
-	                 "value": 1
-	            }]
->>>>>>> origin/master
 	        }]
 	    }]
 
