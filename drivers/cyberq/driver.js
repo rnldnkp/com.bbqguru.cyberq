@@ -113,7 +113,7 @@ var self = {
     init: function(devices_data, callback) {
 		util.wuLog("Initialize driver", severity.debug);	   
 		 
-//        self.checkInsightsLogs();
+        self.checkInsightsLogs();
 
         // Listen for triggers and conditions
         registerTriggerAndConditionListeners();
@@ -167,7 +167,6 @@ var self = {
         
         trigger_update();
 
-// tijdelijk op 30 sec
         var updateTime = update_frequency * 60 * 1000;  // From minutes to milliseconds
         dataInterval = setInterval(trigger_update.bind(this), updateTime);
         
@@ -2157,7 +2156,8 @@ function registerTriggerAndConditionListeners() {
 		        [args.probe + '_name']: args.name
 		        });
 	        var page = '';
-	        postForm(data, page, function (statusCode) {
+	        var device_id = args.device.id;
+	        postForm(data, page, device_id, function (statusCode) {
 		        
 		        if (fullLogging) util.wuLog(callback, severity.debug);
 		        if (statusCode == 200) {
@@ -2406,14 +2406,15 @@ function registerTriggerAndConditionListeners() {
 
 }
 
-function postForm (data, page, callback) {
+function postForm (data, page, device_id, callback) {
 
+    var cyberq_ip = devices[device_id].settings.cyberq_ip;
 
 	var options = {
 	  method: 'post',
 	  body: data,
 	  json: true,
-	  url: 'http://10.10.0.134/' + page,
+	  url: 'http://' + cyberq_ip + '/' + page,
 	  headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded',
 	        'Accept': 'text/plain',

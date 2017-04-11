@@ -283,7 +283,7 @@ var self = {
                 }
 */
 
-                var cookname, cooktemp, cookset, cookstatus, food1name, food1temp, food2set, food1status, food2name, food2temp, food2set, food2status, food3name, food3temp, food3set, food3status, fanoutput, timerleft;
+                var cookname, cooktemp, cookset, cookstatus, food1name, food1temp, food1set, food1status, food2name, food2temp, food2set, food2status, food3name, food3temp, food3set, food3status, fanoutput, timerleft;
 
 
                 if (fullLogging) util.wuLog('Using metric units', severity.debug);
