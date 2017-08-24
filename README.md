@@ -1,31 +1,62 @@
-# com.bbqguru.cyberq
-
-Update 9 april 2017: almost 700 flows are possible at the moment! Now working to finish it up, so it can use the ip-address you set for example ;)
+# Introduction
 
 BBQ Guru CyberQ app for Homey
 
-Just started working on the idea of an App for Homey that connects with your BBQ Guru's CyberQ Wifi.
+Being a BBQ enthousiast I started working on my very first app the day after my Homey arrived. 
+
+The idea is to create an App for Homey that connects with your BBQ Guru's CyberQ Wifi.
 Homey could tell you what is going on and you will be able to make some awesome flows with that information.
 
-For a starter, this is my first GitHub project ever and I just got my Homey yesterday afternoon. I know some basic programming and have made some really simple projects in the past. But this is a whole new chapter for me. So bear with me on this!
+Had quite some challenges to overcome, eventually even stopped working on the app although all functions worked (for me). And then, without doing anything, just waiting and reloading the code onto homey. My biggest bug got solved (remembering the IP-address).
 
-First goal would be to read out the XML data from the CyberQ and let Homey use the data.
+Update 9 april 2017: almost 700 flows are possible at the moment! Now working to finish it up, so it can use the ip-address you set for example ;)
 
-For example:
-* "BBQ Started, currently at 180 degrees"
-* "Diner time! Food <probename> has finished"
-* "Food <probename> is almost ready"
-* "Food <probename> is 5 degrees from reaching the goal of 120 degrees"
+Update 24 august 2017: Didn't do anything for quite some time, but my problem of not being able to get the device ip-address out of homey (after a reboot for example) needs to be fixed before the summer ends... So working on it
 
-Next goal could be to do more intelligent stuff even the CyberQ cannot tell you.
+# What to expect?
 
-For example:
-* "It seems like your charcoal is running out"
-* "Somebody left the lid open"
-* "Did you probe fall out?"
+I started of with some simple reading, like the temperature and delta betweend current and desired temperature.
+But, soon after I created a whole list of options... Here it is
 
-And, if I find out how to do it we could set the probe setting trough homey
+## If
 
-* "Set probe name"
-* "Set desired temperature (both pit probe and food probes)"
-* "Set cook timer"
+* CyberQ went offline
+* CyberQ came online
+* Probe X temperature has changed by Y
+* Probe X temperature is higer than Y
+* Probe X temperature is lower than Y
+* Probe X temperature is less than Y degrees/percent from target
+* Cook status changed to Y
+* Probe X status change to Y
+* Timer was activated
+* Timer is less than Y seconds
+* Timer finished
+
+## And
+
+* CyberQ is online/offline
+* Probe X name is Y
+* Probe X currect/target temp is higher/lower than Y
+* Probe X less/more than Y degrees/percent from target
+* Cook status is (not) equal to Y
+* Probe X status is (not) equal to Y
+* Fan output is lower/higher than Y percent
+* Timer is more/less than Y (HH:MM:SS)
+
+## Then
+
+* Probe X name to Y
+* Probe X target to Y
+* Timer to Y (HH:MM:SS)
+* Alarm beep (disable/volume 1-5)
+* Key beep (disable/enable)
+* Scrolling (disable/enable)
+* Backlight (percentage)
+* Contrast (percentage)
+* Cookhold disable/enable
+* Timeout (no action, hold, alarm, shutdown)
+* Alarm deviation (
+* Ramp (disable/probe 1-3)
+* Open lid detection (disable/enable)
+* Propertional band (
+* Mail alarm (off, port 25/465/587)
