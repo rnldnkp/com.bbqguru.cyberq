@@ -12,8 +12,7 @@ function saveSettings () {
 	        id: 'CQ'+Math.floor(Date.now() / 1000)
 	    },
 	    settings: {
-		    'cyberq_ip': $('#cyberq_ip').val(),
-            'cyberq_ledring': cyberq_ledring
+		    'cyberq_ip': $('#cyberq_ip').val()
 	    },
 	    name: 'CyberQ',
 	}, function( err, result ){
@@ -29,7 +28,6 @@ function saveSettings () {
             },
             settings: {
                 'cyberq_ip': device.settings.cyberq_ip,
-                'cyberq_ledring': device.settings.cyberq_ledring,
             },
             name: device.name,
             capabilities: []
@@ -72,11 +70,6 @@ function saveSettings () {
             <div class="field row">
                 <label for="cyberq_ip">CyberQ WiFi's IP</label>
                 <input id="cyberq_ip" type="text" value="" />
-            </div>
-            <br>
-            <div class="field row">
-                <label for="cyberq_ledring" data-i18n="settings.use_ledring"></label>
-                <input type="checkbox" id="cyberq_ledring" /><br><br><em data-i18n="settings.use_ledring_explain"></em>
             </div>
             <br>
             <p id="error"></p>

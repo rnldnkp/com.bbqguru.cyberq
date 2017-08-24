@@ -20,7 +20,6 @@
         "email": "homey@rnldnkp.com"
     },
     "permissions": [
-	       	"homey:manager:ledring",
 	        "homey:manager:speech-input",
 	        "homey:manager:speech-output"
 		],
@@ -2066,14 +2065,6 @@
 	                 "nl": "IP adres"
 	                 },
 	                 "value": ""
-	                 }, {
-	                 "id": "cyberq_ledring",
-	                 "type": "checkbox",
-	                 "label": {
-	                 "en": "Use ledring",
-	                 "nl": "Gebruik ledring"
-	                 },
-	                 "value": false
 	             }]
 	        }]
 	    }]
