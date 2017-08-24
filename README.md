@@ -58,3 +58,14 @@ But, soon after I created a whole list of options... Here are the options, which
 * Open lid detection (disable/enable)
 * Propertional band (
 * Mail alarm (off, port 25/465/587)
+
+# What might be next
+
+Not sure how many other features I'm able to add. But there's room for improvements.
+My lack of experience made me copy/reuse a lot of functions from other apps. I'm sure I didn't place them all in the optimal place. Also there are no App settings (yet), like the timeout and errorlevel. These are hardcoded for now.
+Good thing these devices are to expensive to have two, since I'm not sure the app can handle two...
+
+# To consider
+
+I'm not a professional developer, never made an app like this before.
+While I try to make sure this app works, I can't pay my bills with it. So bare with me while I try to devide my time between (paid) work, my private life and all other things like this app.
