@@ -7,16 +7,14 @@ Being a BBQ enthousiast I started working on my very first app the day after my 
 The idea is to create an App for Homey that connects with your BBQ Guru's CyberQ Wifi.
 Homey could tell you what is going on and you will be able to make some awesome flows with that information.
 
-Had quite some challenges to overcome, eventually even stopped working on the app although all functions worked (for me). And then, without doing anything, just waiting and reloading the code onto homey. My biggest bug got solved (remembering the IP-address).
+Had quite some challenges to overcome, eventually even stopped working on the app although all functions worked (for me). Didn't quite figure out how to read some information from Homey and use it within the app (passing it along all functions). Seem to have fixed this though.
 
-Update 9 april 2017: almost 700 flows are possible at the moment! Now working to finish it up, so it can use the ip-address you set for example ;)
-
-Update 24 august 2017: Didn't do anything for quite some time, but my problem of not being able to get the device ip-address out of homey (after a reboot for example) needs to be fixed before the summer ends... So working on it
+BETA time!
 
 # What to expect?
 
 I started of with some simple reading, like the temperature and delta betweend current and desired temperature.
-But, soon after I created a whole list of options... Here it is
+But, soon after I created a whole list of options... Here are the options, which create 700+ combinations!
 
 ## If
 
