@@ -1,6 +1,6 @@
 # Introduction
 
-BBQ Guru CyberQ app for Homey
+BBQ Guru CyberQ Wifi app for Homey
 
 Being a BBQ enthousiast I started working on my very first app the day after my Homey arrived. 
 
@@ -11,10 +11,16 @@ Had quite some challenges to overcome, eventually even stopped working on the ap
 
 BETA time!
 
+# A what? CyberQ?
+CyberQ Wifi is a device made by BBQ Guru.
+It's a wireless controller for your BBQ. It measures cook/probe temperatures and uses the fan to keep the BBQ at the desired temperature.
+
 # What to expect?
 
-I started of with some simple reading, like the temperature and delta betweend current and desired temperature.
-But, soon after I created a whole list of options... Here are the options, which create 700+ combinations!
+I started of with some simple readings, like the temperature and delta between current and desired temperature.
+But, soon after I created a whole list of thing that could be done... 
+
+Here are the options, which create 700+ combinations!
 
 ## If
 
@@ -62,10 +68,14 @@ But, soon after I created a whole list of options... Here are the options, which
 # What might be next
 
 Not sure how many other features I'm able to add. But there's room for improvements.
-My lack of experience made me copy/reuse a lot of functions from other apps. I'm sure I didn't place them all in the optimal place. Also there are no App settings (yet), like the timeout and errorlevel. These are hardcoded for now.
-Good thing these devices are to expensive to have two, since I'm not sure the app can handle two...
+My lack of experience made me copy/reuse a lot of functions from other apps. I'm sure I didn't place them all in the optimal place. Good thing these devices are too expensive to have two, since I'm not sure the app can really handle two...
 
 # To consider
 
 I'm not a professional developer, never made an app like this before.
 While I try to make sure this app works, I can't pay my bills with it. So bare with me while I try to devide my time between (paid) work, my private life and all other things like this app.
+
+# Thanks
+A big thank you goes out to Inversion-NL without him knowing it. His Wundergournd app inspired me the most while they don't even seem to look-a-like. ;)
+
+Next, thanks to the guys at Sybrand's Place (Lubbert, Marijn, Max) for creating such a fine place to discuss Athom with each other. Everyone who likes to create something should visit (check the forum/slack for more info).
