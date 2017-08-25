@@ -12,8 +12,8 @@
     },
 	"category": "appliances",
     "images": {
-        "large": "assets/images/large.jpg",
-        "small": "assets/images/small.jpg"
+        "large": "cyberq/assets/images/large.jpg",
+        "small": "cyberq/assets/images/small.jpg"
     },
     "author": {
         "name": "Ronald Niekoop",
