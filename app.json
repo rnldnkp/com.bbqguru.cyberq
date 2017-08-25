@@ -12,8 +12,8 @@
     },
 	"category": "appliances",
     "images": {
-        "large": "cyberq/assets/images/large.jpg",
-        "small": "cyberq/assets/images/small.jpg"
+        "large": "assets/images/large.jpg",
+        "small": "assets/images/small.jpg"
     },
     "author": {
         "name": "Ronald Niekoop",
@@ -1950,8 +1950,8 @@
 	        "nl": "CyberQ WiFi"
 	        },
 	        "images": {
-	        "large": "drivers/assets/images/large.jpg",
-	        "small": "drivers/assets/images/small.jpg"
+	        "large": "drivers/cyberq/assets/images/large.jpg",
+	        "small": "drivers/cyberq/assets/images/small.jpg"
 	        },
 	        "class": "sensor",
 	        "capabilities": [
