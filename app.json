@@ -4,7 +4,7 @@
         "en": "BBQ Guru",
         "nl": "BBQ Guru"
     },
-    "version": "0.9.1",
+    "version": "0.9.2",
     "compatibility": ">=1.1.2",
     "description": {
         "en": "Let Homey control your BBQ Pit",
