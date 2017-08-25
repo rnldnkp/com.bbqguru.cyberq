@@ -7,9 +7,9 @@ Being a BBQ enthousiast I started working on my very first app the day after my 
 The idea is to create an App for Homey that connects with your BBQ Guru's CyberQ Wifi.
 Homey could tell you what is going on and you will be able to make some awesome flows with that information.
 
-Had quite some challenges to overcome, eventually even stopped working on the app although all functions worked (for me). Didn't quite figure out how to read some information from Homey and use it within the app (passing it along all functions). Seem to have fixed this though.
+Had quite some challenges to overcome, eventually even stopped working on the app although all functions worked (using some static info). Didn't quite figure out how to read some information from Homey and use it within the app (passing it along all functions). 
 
-BETA time!
+Seem to have fixed this though. That means BETA time!
 
 # A what? CyberQ?
 CyberQ Wifi is a device made by BBQ Guru.
