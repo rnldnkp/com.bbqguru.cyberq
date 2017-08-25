@@ -76,6 +76,6 @@ I'm not a professional developer, never made an app like this before.
 While I try to make sure this app works, I can't pay my bills with it. So bare with me while I try to devide my time between (paid) work, my private life and all other things like this app.
 
 # Thanks
-A big thank you goes out to Inversion-NL without him knowing it. His Wundergournd app inspired me the most while they don't even seem to look-a-like. ;)
+A big thank you goes out to InversionNL without him knowing it. His Wunderground app inspired me the most while they don't even seem to look-a-like. ;)
 
 Next, thanks to the guys at Sybrand's Place (Lubbert, Marijn, Max) for creating such a fine place to discuss Athom with each other. Everyone who likes to create something should visit (check the forum/slack for more info).
