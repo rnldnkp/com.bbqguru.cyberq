@@ -2,14 +2,10 @@
 function saveSettings () {
     $('#error').html('');
 	$('#save').prop('disabled', true);
-    if ($('#cyberq_ledring').is(":checked")) {
-        var cyberq_ledring = true;
-    } else {
-        var cyberq_ledring = false;
-    }
 	Homey.emit('manual_add', {
 	    data: { // this data object is saved to- and unique for the device. It is passed on the get and set functions as 1st argument
-	        id: 'CQ'+Math.floor(Date.now() / 1000)
+	        id: 'CQ'+Math.floor(Date.now() / 1000),
+            ip: $('#cyberq_ip').val()
 	    },
 	    settings: {
 		    'cyberq_ip': $('#cyberq_ip').val()
@@ -24,10 +20,11 @@ function saveSettings () {
         $('#save').prop('disabled', true);
         Homey.addDevice({
             data: { // this data object is saved to- and unique for the device. It is passed on the get and set functions as 1st argument
-                id: 'CQ'+Math.floor(Date.now() / 1000)
+                id: 'CQ'+Math.floor(Date.now() / 1000),
+                ip: device.settings.cyberq_ip
             },
             settings: {
-                'cyberq_ip': device.settings.cyberq_ip,
+                'cyberq_ip': device.settings.cyberq_ip
             },
             name: device.name,
             capabilities: []
@@ -68,11 +65,11 @@ function saveSettings () {
     <body>
         <p data-i18n="settings.intro"></p>
             <div class="field row">
-                <label for="cyberq_ip">CyberQ WiFi's IP</label>
+                <label for="cyberq_ip">settings.device.ip</label>
                 <input id="cyberq_ip" type="text" value="" />
             </div>
             <br>
             <p id="error"></p>
-        <button class="right" onclick="saveSettings()" id="save" data-i18n="settings.save"></button>
+        <button class="right" onclick="saveSettings()" id="save" data-i18n="settings.button.save"></button>
     </body>
 </html>

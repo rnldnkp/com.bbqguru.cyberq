@@ -1,12 +1,27 @@
 {
-    "status_hot": "too hot",
-    "status_cold": "too cold",
-    "status_ok": "just fine",
-    "settings": {
-        "title": "CyberQ WiFi settings",
-        "intro": "To connect to your CyberQ WiFi we need the settings below.",
-        "use_ledring": "Use ledring",
-        "use_ledring_explain": "Ledring lights up green when preset switched successful, red when not successful",
-        "save": "Save"
+  "settings": {
+    "device": {
+      "title": "CyberQ WiFi settings",
+      "intro": "To connect to your CyberQ WiFi we need the settings below.",
+      "ip": "IP-Address"
+    },
+    "app": {
+      "title": "CyberQ WiFi App settings",
+      "global": {
+        "title": "Global settings",
+        "update_frequency": "Update every (minute)",
+        "updateFrequency_explanation": "Minimum once per 60 minutes, maximum once per minute.",
+        "error_level": "Detailed logging",
+        "error_level_explanation": "Enable detailed logging for troubleshooting"
+      }
+    },
+    "button": {
+      "save": "Save"
+    },
+    "messages": {
+      "settings_saved": "Settings saved",
+      "settings_noSettingsChanged": "No setting has been changed",
+      "settings_unexpectedError": "Unexpected error occurred. Please try again"
     }
+  }
 }

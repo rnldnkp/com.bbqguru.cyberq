@@ -1,12 +1,27 @@
 {
-    "status_hot": "te heet",
-    "status_cold": "erg koud",
-    "status_ok": "prima",
-    "settings": {
-        "title": "CyberQ WiFi instellingen",
-        "intro": "Om verbinding te kunnen maken met uw CyberQ WiFi zijn onderstaande gegevens benodigd.",
-        "use_ledring": "Gebruik ledring",
-        "use_ledring_explain": "Ledring licht groen op indien de preset aangepast is, rood indien niet succesvol",
-        "save": "Opslaan"
+  "settings": {
+    "device": {
+      "title": "CyberQ WiFi Apparaat instellingen",
+      "intro": "Om verbinding te kunnen maken met uw CyberQ WiFi zijn onderstaande gegevens benodigd.",
+      "ip": "IP-Adres"
+    },
+    "app": {
+      "title": "CyberQ WiFi App Instellingen",
+      "global": {
+        "title": "Globale instellingen",
+        "update_frequency": "Bijwerken elke (min)",
+        "updateFrequency_explanation": "Minimum is elke 60 minuten, maximum is elke minuut.",
+        "error_level": "Gedetailleerde logging",
+        "error_level_explanation": "Gedetailleerde logging inschakelen om problemen op te lossen"
+      }
+    },
+    "button": {
+      "save": "Opslaan"
+    },
+    "messages": {
+      "settings_saved": "Instellingen opgeslagen",
+      "settings_noSettingsChanged": "Er is niets gewijzigingd",
+      "settings_unexpectedError": "Onverwachte fout opgetreden. Probeer nogmaals a.u.b."
     }
+  }
 }

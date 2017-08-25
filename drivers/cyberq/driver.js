@@ -16,7 +16,7 @@ const util = require('./../../lib/util.js');
 const parser = require('xml2json-light');
 
 // Enable full logging for more info
-const fullLogging = true;
+var fullLogging = true;
 
 const defaultUpdateTime = 1;
 const insightsLogs = [
@@ -78,7 +78,7 @@ var self = {
 	pair: function( socket ) {
     socket.on('manual_add', function (device, callback) 
     	{
-	        var url = 'http://' + device.settings.cyberq_ip + '/config.xml';
+	        var url = 'http://' + device.data.ip + '/config.xml';
 	        Homey.log('Calling '+ url);
 	        request(url, function (error, response, body) 
 	        	{
@@ -93,7 +93,7 @@ var self = {
 			                devices[device.data.id] = {
 			                  id: device.data.id,
 			                  name: device.name,
-			                  settings: device.settings
+                              ip: device.data.ip
 			                };
 			                callback( null, devices );
 			                socket.emit("success", device);
@@ -118,9 +118,6 @@ var self = {
         // Listen for triggers and conditions
         registerTriggerAndConditionListeners();
 
-        // Listen for speech input
-        //Homey.manager('speech-input').on('speech', parseSpeech);
-
         // Listen for changes in settings
         util.wuLog("Registering settings listener", severity.debug);
         Homey.manager('settings').on('set', self.settingsChanged);
@@ -131,7 +128,7 @@ var self = {
         // Get all Cyberq devices
         self.getDevices(devices_data);
         
-        // Check settings and start updating weather
+        // Check settings and start updating data
         self.checkSettings();
                     
                     
@@ -172,19 +169,10 @@ var self = {
         
         
         function trigger_update() {
-            //self.updateData();
             
             Object.keys(devices).forEach(function (device_id) 
-            	{  
-		                     
-/*
-					if (typeof devices[device_id].data === 'undefined') 
-						{
-			            	devices[device_id].data = [];  
-			         	}
-*/
-			        var cyberq_ip = devices[device_id].settings.cyberq_ip;
-			        //var cyberq_ip = "10.10.0.134";
+            	{
+                    var cyberq_ip = devices[device_id].ip;
 			        var url = 'http://' + cyberq_ip + '/all.xml';
 			        util.wuLog("Requesting updateData: " + url, severity.debug);
 			        self.updateData(device_id, url) 
@@ -239,11 +227,16 @@ var self = {
         // Check units to use in app
         self.setUnits();
 
+
+        /*
+        Not used yet
+
         // Get user preference setting for notifications on errors
         useErrorNotifications = Homey.manager('settings').get('useErrorNotifications');
         if(!util.value_exist(useErrorNotifications)) useErrorNotifications = true;
         util.wuLog('Use error notifications: ' + useErrorNotifications, severity.debug);
         if (!util.value_exist(useErrorNotifications)) useErrorNotifications = true;
+         */
 
         // Get user settings for update frequency
         update_frequency = Homey.manager('settings').get('updateFrequency');
@@ -255,9 +248,11 @@ var self = {
             util.wuLog("Update value: " + update_frequency + " minutes", severity.debug);
         }
 
-        // Get user settings for update frequency
-//         cyberq_ip = Homey.manager('settings').get('cyberq_ip');
-//         util.wuLog("Update every (user setting): " + cyberq_ip, severity.debug);
+        // Get user preference setting for detailedLogging (fullLogging in this file)
+        fullLogging = Homey.manager('settings').get('detailedLogging');
+        if(!util.value_exist(fullLogging)) fullLogging = true;
+        util.wuLog('Detailled logging: ' + fullLogging, severity.debug);
+        //if (!util.value_exist(fullLogging)) fullLogging = true;
 
         self.scheduleData(update_frequency);
     },
@@ -276,8 +271,10 @@ var self = {
         } else if (settingName == 'updateFrequency' || settingName == 'updateFrequency') {
             // If the frequency is changed we have to cancel the current interval and schedule a new
             self.checkSettings();
-            util.wuLog("Scheduling weather update every:" + update_frequency, severity.debug);
+            util.wuLog("Scheduling data update every:" + update_frequency, severity.debug);
             self.scheduleData(update_frequency);
+        } else if (settingName == 'detailedLogging' || settingName == 'detailedlogging') {
+            fullLogging = Homey.manager('settings').get('detailedLogging');
         } else if (settingName == 'units_auto' || settingName == 'units_imperial' || settingName == 'units_metric') {
             // Let's check if the units have changed
             var units_metric = Homey.manager('settings').get('units_metric');
@@ -2408,7 +2405,7 @@ function registerTriggerAndConditionListeners() {
 
 function postForm (data, page, device_id, callback) {
 
-    var cyberq_ip = devices[device_id].settings.cyberq_ip;
+    var cyberq_ip = devices[device_id].ip;
 
 	var options = {
 	  method: 'post',
@@ -2452,112 +2449,6 @@ function registerWarningAndPerformanceListeners() {
     }
 }
 
-/*
-function parseSpeech(speech, callback) {
-    util.wuLog("", severity.debug);
-    util.wuLog("parseSpeech", severity.debug);
-
-    // On very first start units aren't always there yet
-    if (!util.value_exist(units_metric)) {
-        units_metric = Homey.manager('settings').get('units_metric');
-        var units_imperial = Homey.manager('settings').get('units_imperial');
-        var units_auto = Homey.manager('settings').get('units_auto');
-        var homey_units = Homey.manager('i18n').getUnits();
-
-        if (units_auto && util.value_exist(homey_units) && homey_units != "") {
-            Homey.manager('settings').set('currentSettingUnits', 'auto');
-            if (homey_units == 'metric') {
-                if (fullLogging) util.wuLog('Autodetect metric units', severity.debug);
-                units_metric = true;
-            } else {
-                if (fullLogging) util.wuLog('Autodetect imperial units', severity.debug);
-                units_metric = false;
-            }
-        }
-    }
-
-    self.updateForecast();
-    self.updateWeather();
-
-    if (util.value_exist(forecastData) && forecastData.length > 0 && util.value_exist(cyberqData) && Object.keys(cyberqData).length > 0) {
-        util.wuLog("Weather and forecast data available", severity.debug);
-
-        // Units available:
-        // var temp_unit = unitData.temp_unit;
-        // var distance_unit = unitData.distance_unit;
-        // var speed_unit = unitData.speed_unit;
-        // var pressure_unit = unitData.pressure_unit;
-        // var distance_small_unit = unitData.distance_small_unit;
-
-        speech.triggers.some(function (trigger) {
-
-            var text;
-
-            switch (trigger.id) {
-                case 'weather_tomorrow' :
-                    util.wuLog("weather_tomorrow", severity.debug);
-
-                    if (units_metric)
-                        text = forecastData[2].fcttext_metric;
-                    else
-                        text = forecastData[2].fcttext;
-
-                    speech.say(util.parseAbbreviations(text));
-                    callback(null, true);
-                    return true;
-
-                case 'weather_dayAfterTomorrow' :
-                    util.wuLog("weather_dayAfterTomorrow", severity.debug);
-
-                    if (units_metric)
-                        text = forecastData[4].fcttext_metric;
-                    else
-                        text = forecastData[4].fcttext;
-
-                    speech.say(util.parseAbbreviations(text));
-                    callback(null, true);
-                    return true;
-
-                case 'weather_today' :
-                    util.wuLog("weather_today", severity.debug);
-
-                    if (units_metric)
-                        text = forecastData[0].fcttext_metric;
-                    else
-                        text = forecastData[0].fcttext;
-
-                    speech.say(util.parseAbbreviations(text));
-                    callback(null, true);
-                    return true;
-
-                case 'rain_today' :
-                    util.wuLog("rain_today", severity.debug);
-                    text = __("app.speech.rainToday") + " " + cyberqData.precip_today + unitData.distance_small_unit;
-                    speech.say(util.parseAbbreviations(text));
-                    text = "";
-                    callback(null, true);
-                    return true;
-
-                case 'rain_hour' :
-                    util.wuLog("rain_hour", severity.debug);
-                    text = __("app.speech.rainToday") + " " + cyberqData.precip_1hr + unitData.distance_small_unit;
-                    speech.say(util.parseAbbreviations(text));
-                    text = "";
-                    callback(null, true);
-                    return true;
-
-                default:
-                    // Guess it wasn't meant for this app, return that in the callback
-                    callback(true, null);
-            }
-        });
-    } else {
-        if (fullLogging) util.wuLog("!! Weather and forecast not available", severity.debug);
-        speech.say(__("app.speech.weatherDataNotAvailableYet"));
-        callback(null, true);
-    }
-}
-*/
 
 function triggerError(errorMsg) {
     if (useErrorNotifications) sendNotification(errorMsg);

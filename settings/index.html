@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+
+</head>
+<body>
+
+<h1 data-i18n="settings.app.title"></h1>
+
+<form id="locationform">
+    <fieldset id="cyberqSet">
+        <legend>
+            <label data-i18n="settings.app.global.title"></label>
+        </legend>
+        <div data-role="fieldcontain" style="margin:0;">
+            <label class="form_label" for="updateFrequency" data-i18n="settings.app.global.update_frequency"></label>
+            <input class="form_input" id="updateFrequency" type="number" value="1"/>
+        </div>
+        <p style="font-size:10px" data-i18n="settings.app.global.updateFrequency_explanation"></p>
+        <br />
+        <div data-role="fieldcontain" style="margin:0;">
+            <label class="form_label" data-i18n="settings.app.global.error_level"></label>
+            <div class="field">
+                <input class="checkbox" id="detailedLogging" type="checkbox" checked="true">
+                <label class="form_label" for="detailedLogging" data-i18n="settings.app.global.error_level_explanation"></label>
+            </div>
+        </div>
+
+    </fieldset>
+
+
+</form>
+
+<button class="right" id="button_save" onclick="save()" data-i18n="settings.button.save">Save</button>
+
+<script type="text/javascript">
+    var currentValues = {};
+    function onHomeyReady(){
+
+        var button_save = document.getElementById('button_save');
+        button_save.disabled = false;
+
+        Homey.get('updateFrequency', function(err, updateFrequency) {
+            if (err) {
+                console.error(err);
+                updateFrequency = 1;
+            }
+            if (typeof updateFrequency == 'undefined' || updateFrequency == null) updateFrequency = 1;
+            document.getElementById('updateFrequency').value = updateFrequency;
+            currentValues.updateFrequency = updateFrequency;
+        });
+
+        Homey.get('detailedLogging', function(err, detailedLogging) {
+            console.log('detailedLogging setting:', detailedLogging);
+            console.log('detailedLogging variable get err:', err);
+            if (err) {
+                console.error(err);
+                detailedLogging = true;
+            }
+            if (typeof detailedLogging == 'undefined' || detailedLogging == null) {
+                console.log('var detailedLogging:', detailedLogging);
+                detailedLogging = true;
+            }
+            document.getElementById('detailedLogging').checked = detailedLogging;
+            currentValues.detailedLogging = detailedLogging;
+        });
+
+        Homey.ready()
+    }
+
+    function save() {
+
+        console.log('current values', currentValues);
+
+        var valuesHaveBeenChanged = false;
+
+        if (currentValues.updateFrequency != document.getElementById('updateFrequency').value) {
+            console.log('updateFrequency value has been changed, saving');
+            Homey.set('updateFrequency', document.getElementById('updateFrequency').value);
+            valuesHaveBeenChanged = true;
+            currentValues.updateFrequency = document.getElementById('updateFrequency').value;
+        }
+
+        if (currentValues.detailedLogging != document.getElementById('detailedLogging').checked) {
+            var detailedLogging = document.getElementById('detailedLogging').checked;
+            console.log('detailedLogging value has been changed, saving');
+            Homey.set('detailedLogging', detailedLogging);
+            valuesHaveBeenChanged = true;
+            currentValues.detailedLogging = document.getElementById('detailedLogging').checked;
+        }
+
+        if (valuesHaveBeenChanged) Homey.alert(__('settings.messages.settings_saved'));
+        else Homey.alert(__('settings.messages.settings_noSettingsChanged'));
+    }
+
+
+</script>
+
+</body>
+</html>
