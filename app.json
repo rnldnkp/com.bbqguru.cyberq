@@ -17,8 +17,8 @@
         "small": "assets/images/small.jpg"
     },
     "author": {
-        "name": "Ronald Niekoop",
-        "email": "homey@rnldnkp.com"
+        "name": "Ronald N",
+        "email": "ronald@rnldnkp.com"
     },
     "permissions": [
 	        "homey:manager:speech-input",
